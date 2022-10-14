@@ -7,10 +7,9 @@ class Mapa
 private:
 public:	
 	std::map<std::string, Sala> mapa;
-
+	Player player;
 	void crearMapa();
 	void leerMapa();
-	void guardarMapa();
 	void pintarMapa(std::string zona);
 };
 

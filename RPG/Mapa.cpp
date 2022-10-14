@@ -29,23 +29,14 @@ void Mapa::leerMapa() {
 	{
         for (auto it = mapa.begin(); it != mapa.end(); it++) {
 			it->second.leerSala();
+			it->second.player = &player;
 	    }
 	}
 	catch (std::string error) {
 		std::cout << error;
 	}
 }
-void Mapa::guardarMapa() {
-	try
-	{
-		for (auto it = mapa.begin(); it != mapa.end(); it++) {
-			it->second.guardarSala();
-		}
-	}
-	catch (std::string error) {
-		std::cout << error;
-	}
-}
+
 void Mapa::pintarMapa(std::string zona) {
 
 	mapa.find(zona)->second.pintarSala();
