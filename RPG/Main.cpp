@@ -13,7 +13,8 @@ int main() {
 
 	inputController.detach();
 
-	Mapa mapa;
+	Player player;
+	Mapa mapa(&player);
 	mapa.crearMapa();
 	mapa.leerMapa();
 	mapa.pintarMapa("medio");
@@ -23,7 +24,7 @@ int main() {
 
 	while (gameloop)
 	{
-		std::thread playerMovement(&Player::playerInputs, mapa.player, &inputManager);
+		std::thread playerMovement(&Player::playerInputs, player, &inputManager);
 		playerMovement.detach();
 		
 	}
