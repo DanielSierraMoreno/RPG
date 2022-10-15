@@ -37,7 +37,7 @@ void Mapa::leerMapa() {
 	}
 }
 
-void Mapa::pintarMapa(std::string zona) {
+void Mapa::pintarMapa() {
 
 	mapa.find(zona)->second.pintarSala();
 }

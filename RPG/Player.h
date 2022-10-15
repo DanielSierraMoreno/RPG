@@ -1,14 +1,20 @@
 #pragma once
 #include "InputManager.h"
+#include "ConsoleControl.h"
 
 class Player
 {
 private:
+public:	
+	ConsoleControl consoleControl;
 
-public:
+	enum PlayerState{UP,RIGHT,LEFT,DOWN,STAY,POTION};
+
+	PlayerState playerState;
 	int x;
 	int y;
-	Player() { x = 10; y = 5; }
-	void playerInputs(InputManager* inputs);
+	char player;
+	Player() { x = 10; y = 5; playerState = STAY; player = 'P'; }
+
 };
 

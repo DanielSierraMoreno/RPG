@@ -1,4 +1,6 @@
 #include "Sala.h"
+#include "ConsoleControl.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -89,4 +91,147 @@ void Sala::crearEnemigo() {
 	enemy.y = y;
 
 	enemies.push_back(enemy);
+}
+
+
+void Sala::playerInputs(InputManager inputs) {
+
+
+	switch (inputs.GetKey())
+	{
+	case KB_UP:
+		player->playerState = Player::UP;
+		break;
+	case KB_DOWN:
+		player->playerState = Player::DOWN;
+
+		break;
+	case KB_LEFT:
+		player->playerState = Player::LEFT;
+
+		break;
+	case KB_RIGHT:
+		player->playerState = Player::RIGHT;
+
+		break;
+	case KB_SPACE:
+		player->playerState = Player::POTION;
+
+		break;
+	default:
+		break;
+	}
+	playerAction();
+}
+
+void Sala::playerAction() {
+
+	switch (player->playerState)
+	{
+	case Player::UP:
+		if (sala[player->y - 1][player->x] == '#')break;
+		else if (sala[player->y - 1][player->x] == 'E')
+		{
+
+		}
+		else if (sala[player->y - 1][player->x] == 'C')
+		{
+
+		}
+		else if (sala[player->y - 1][player->x] == 'O')
+		{
+
+		}
+		else
+		{
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << ' ';
+			player->y--;
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << player->player;
+		}
+		player->playerState = Player::STAY;
+
+		break;
+	case Player::RIGHT:
+		if (sala[player->y][player->x + 1] == '#')break;
+		else if (sala[player->y][player->x + 1] == 'E')
+		{
+
+		}
+		else if (sala[player->y][player->x + 1] == 'C')
+		{
+
+		}
+		else if (sala[player->y][player->x + 1] == 'O')
+		{
+
+		}
+		else
+		{
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << ' ';
+			player->x++;
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << player->player;
+		}
+		player->playerState = Player::STAY;
+
+		break;
+	case Player::LEFT:
+		if (sala[player->y][player->x - 1] == '#')break;
+		else if (sala[player->y][player->x - 1] == 'E')
+		{
+
+		}
+		else if (sala[player->y][player->x - 1] == 'C')
+		{
+
+		}
+		else if (sala[player->y][player->x - 1] == 'O')
+		{
+
+		}
+		else
+		{
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << ' ';
+			player->x--;
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << player->player;
+		}
+		player->playerState = Player::STAY;
+
+		break;
+	case Player::DOWN:
+		if (sala[player->y + 1][player->x] == '#')break;
+		else if (sala[player->y + 1][player->x] == 'E')
+		{
+
+		}
+		else if (sala[player->y + 1][player->x] == 'C')
+		{
+
+		}
+		else if (sala[player->y + 1][player->x] == 'O')
+		{
+
+		}
+		else
+		{
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << ' ';
+			player->y++;
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << player->player;
+		}
+		player->playerState = Player::STAY;
+
+		break;
+	case Player::POTION:
+
+		break;
+	default:
+		break;
+	}
 }

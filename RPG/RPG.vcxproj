@@ -156,7 +156,6 @@
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sala.h" />
-    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

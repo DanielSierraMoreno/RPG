@@ -50,14 +50,14 @@ void InputManager::StopListener()
 
 int InputManager::GetKey()
 {
-    int keys;
+    int lastKey = 0;
     inputsReadMutex->lock();
 
-    keys = (*inputsRead)[inputsRead->size()-1];
-
+    if (inputsRead->size() > 0) {
+        lastKey = (*inputsRead)[inputsRead->size()-1];
+    }
     inputsRead->clear();
-
     inputsReadMutex->unlock();
 
-    return keys;
+    return lastKey;
 }

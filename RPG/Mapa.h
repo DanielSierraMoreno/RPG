@@ -8,9 +8,11 @@ private:
 public:	
 	std::map<std::string, Sala> mapa;
 	Player* player;
+	std::string zona;
 	Mapa(Player* player) { this->player = player; }
 	void crearMapa();
 	void leerMapa();
-	void pintarMapa(std::string zona);
+	void pintarMapa();
+	Sala* salaActual() { return &mapa.find(zona)->second; }
 };
 

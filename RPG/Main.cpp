@@ -17,15 +17,15 @@ int main() {
 	Mapa mapa(&player);
 	mapa.crearMapa();
 	mapa.leerMapa();
-	mapa.pintarMapa("medio");
+	mapa.zona = "arriba";
+	mapa.pintarMapa();
 
 
 	bool gameloop = true;
 
 	while (gameloop)
 	{
-		std::thread playerMovement(&Player::playerInputs, player, &inputManager);
-		playerMovement.detach();
+		mapa.salaActual()->playerInputs(inputManager);
 		
 	}
 

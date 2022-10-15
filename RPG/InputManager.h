@@ -18,6 +18,5 @@ public:
     void StartListener();
     void StopListener();
     int GetKey();
-    bool keyPressed() { return inputsRead->size(); }
 };
 
