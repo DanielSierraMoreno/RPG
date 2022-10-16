@@ -14,5 +14,10 @@ public:
 	void leerMapa();
 	void pintarMapa();
 	Sala* salaActual() { return &mapa.find(zona)->second; }
+
+	void leerPlayer();
+	void leerZona();
+	void guardarPlayer();
+	void guardarZona();
 };
 

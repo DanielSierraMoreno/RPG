@@ -5,6 +5,10 @@
 class Player
 {
 private:
+	int vidas;
+	int monedas;
+	int pociones;
+
 public:	
 	ConsoleControl consoleControl;
 

@@ -18,7 +18,6 @@ int main() {
 	mapa.crearMapa();
 	mapa.leerMapa();
 	mapa.zona = "medio";
-	mapa.salaActual()->crearEnemigo();
 
 
 
@@ -36,8 +35,8 @@ int main() {
 			mapa.pintarMapa();
 		}
 
-		mapa.salaActual()->playerInputs(inputManager);
-		
+		std::thread playerMove(&Sala::playerInputs, mapa.salaActual(), inputManager);
+			playerMove.detach();
 
 
 

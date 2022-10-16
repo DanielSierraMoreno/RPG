@@ -28,5 +28,11 @@ public:
 	void playerInputs(InputManager inputs);
 	void playerAction();
 	void addPortal(string loc, string sala) { locations.insert({loc, sala}); }
+
+	void leerEnemigos();
+	void leerCofres();
+	void guardarCofres();
+	void guardarEnemigos();
+
 };
 

@@ -101,6 +101,7 @@ void Sala::crearEnemigo() {
 void Sala::playerInputs(InputManager inputs) {
 
 
+
 	switch (inputs.GetKey())
 	{
 	case KB_UP:
@@ -125,10 +126,13 @@ void Sala::playerInputs(InputManager inputs) {
 	default:
 		break;
 	}
+
+
 	playerAction();
 }
 
 void Sala::playerAction() {
+
 
 	switch (player->playerState)
 	{
