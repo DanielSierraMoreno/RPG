@@ -14,7 +14,7 @@ public:
 	int x;
 	int y;
 	char player;
-	Player() { x = 10; y = 5; playerState = STAY; player = 'P'; }
+	Player() { x = 16; y = 6; playerState = STAY; player = 'P'; }
 
 };
 

@@ -11,27 +11,31 @@ void Sala::leerSala() {
 
 	if (!mapa.is_open()) throw "Error reading file " + fileName;
 
-	for (int y = 0; y < 11; y++) {
-		for (int x = 0; x < 22; x++) {
+	for (int y = 0; y < sizeY; y++) {
+		for (int x = 0; x < sizeX; x++) {
 			mapa >> std::noskipws >> sala[y][x];
 		}
 	}
 	mapa.close();
+	//Al leer el mapa se leen los enters, en la ultima linea no tiene que mostrar nada
+	sala[sizeY-1][sizeX-1] = ' ';
 
+}
+
+void Sala::pintarSala() {
 	for (int i = 0; i < cofres.size(); i++) {
 		sala[cofres[i].y][cofres[i].x] = cofres[i].cofre;
 	}
 	for (int i = 0; i < enemies.size(); i++) {
 		sala[enemies[i].y][enemies[i].x] = enemies[i].enemigo;
 	}
-}
-
-void Sala::pintarSala() {
-	for (int y = 0; y < 11; y++) {
-		for (int x = 0; x < 22; x++) {
+	for (int y = 0; y < sizeY; y++) {
+		for (int x = 0; x < sizeX; x++) {
 			std::cout << sala[y][x];
 		}
 	}
+	player->consoleControl.SetPosition(player->x, player->y);
+	std::cout << player->player;
 }
 void Sala::crearCofre() {
 	Cofre cofre;
@@ -39,8 +43,8 @@ void Sala::crearCofre() {
 	int y;
 	int x;
 	while (espacioIncorrecto) {
-		x = rand() % 19 + 1;
-		y = rand() % 1 + 9;
+		x = rand() % (sizeX-2) + 1;
+		y = rand() % 1 + (sizeY-2);
 		if (sala[y][x] == ' ')
 		{
 			if (y == player->y - 1 && x == player->x - 1) {}
@@ -69,8 +73,8 @@ void Sala::crearEnemigo() {
 	int y;
 	int x;
 	while (espacioIncorrecto) {
-		x = rand() % 19 + 1;
-		y = rand() % 1 + 9;
+		x = rand() % (sizeX-2) + 1;
+		y = rand() % 1 + (sizeY-2);
 		if (sala[y][x] == ' ')
 		{
 			if (y == player->y - 1 && x == player->x - 1) {}
@@ -141,6 +145,7 @@ void Sala::playerAction() {
 		else if (sala[player->y - 1][player->x] == 'O')
 		{
 			location = locations.find("Norte")->second;
+			player->y += sizeY - 3;
 		}
 		else
 		{
@@ -166,6 +171,8 @@ void Sala::playerAction() {
 		else if (sala[player->y][player->x + 1] == 'O')
 		{
 			location = locations.find("Este")->second;
+			player->x -= sizeX-4;
+
 		}
 		else
 		{
@@ -191,6 +198,7 @@ void Sala::playerAction() {
 		else if (sala[player->y][player->x - 1] == 'O')
 		{
 			location = locations.find("Oeste")->second;
+			player->x += sizeX - 4;
 
 		}
 		else
@@ -217,6 +225,7 @@ void Sala::playerAction() {
 		else if (sala[player->y + 1][player->x] == 'O')
 		{
 			location = locations.find("Sur")->second;
+			player->y -= sizeY - 3;
 
 		}
 		else

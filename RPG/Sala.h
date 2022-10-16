@@ -14,11 +14,13 @@ private:
 	std::vector<Enemy> enemies;
 	std::vector<Cofre> cofres;
 	std::map<string, string> locations;
+	int sizeX = 34; 
+	int sizeY = 13;
 public:	
 	std::string location;
-	char sala[11][22];
+	char** sala = new char*[sizeY];
 	Player* player;
-	Sala(std::string fileName) { this->fileName = fileName; }
+	Sala(std::string fileName) { this->fileName = fileName; for (int i = 0; i < sizeY; ++i) { sala[i] = new char[sizeX];}}
 	void leerSala();
 	void pintarSala();
 	void crearCofre();

@@ -17,9 +17,12 @@ int main() {
 	Mapa mapa(&player);
 	mapa.crearMapa();
 	mapa.leerMapa();
-	mapa.zona = "arriba";
-	mapa.pintarMapa();
+	mapa.zona = "medio";
+	mapa.salaActual()->crearEnemigo();
 
+
+
+	mapa.pintarMapa();
 
 	bool gameloop = true;
 
@@ -32,8 +35,6 @@ int main() {
 			system("cls");
 			mapa.pintarMapa();
 		}
-
-
 
 		mapa.salaActual()->playerInputs(inputManager);
 		
