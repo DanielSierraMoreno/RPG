@@ -140,7 +140,7 @@ void Sala::playerAction() {
 		}
 		else if (sala[player->y - 1][player->x] == 'O')
 		{
-
+			location = locations.find("Norte")->second;
 		}
 		else
 		{
@@ -165,7 +165,7 @@ void Sala::playerAction() {
 		}
 		else if (sala[player->y][player->x + 1] == 'O')
 		{
-
+			location = locations.find("Este")->second;
 		}
 		else
 		{
@@ -190,6 +190,7 @@ void Sala::playerAction() {
 		}
 		else if (sala[player->y][player->x - 1] == 'O')
 		{
+			location = locations.find("Oeste")->second;
 
 		}
 		else
@@ -215,6 +216,7 @@ void Sala::playerAction() {
 		}
 		else if (sala[player->y + 1][player->x] == 'O')
 		{
+			location = locations.find("Sur")->second;
 
 		}
 		else

@@ -25,8 +25,21 @@ int main() {
 
 	while (gameloop)
 	{
+		if (mapa.salaActual()->location != "") {
+			std::string loc = mapa.salaActual()->location;
+			mapa.salaActual()->location = "";
+			mapa.zona = loc;
+			system("cls");
+			mapa.pintarMapa();
+		}
+
+
+
 		mapa.salaActual()->playerInputs(inputManager);
 		
+
+
+
 	}
 
 }

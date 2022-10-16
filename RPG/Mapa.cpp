@@ -23,6 +23,41 @@ void Mapa::crearMapa() {
 	mapa.insert({ "abajoIzq", sala6 });
 	mapa.insert({ "abajo", sala7 });
 	mapa.insert({ "abajoDer", sala8 });
+
+
+
+	mapa.find("arribaIzq")->second.addPortal("Este", "arriba");
+	mapa.find("arribaIzq")->second.addPortal("Sur", "medioIzq");
+
+	mapa.find("arriba")->second.addPortal("Oeste", "arribaIzq");
+	mapa.find("arriba")->second.addPortal("Sur", "medio");
+	mapa.find("arriba")->second.addPortal("Este", "arribaDer");
+
+	mapa.find("arribaDer")->second.addPortal("Oeste", "arriba");
+	mapa.find("arribaDer")->second.addPortal("Sur", "medioDer");
+
+	mapa.find("medioIzq")->second.addPortal("Norte", "arribaIzq");
+	mapa.find("medioIzq")->second.addPortal("Este", "medio");
+	mapa.find("medioIzq")->second.addPortal("Sur", "abajoIzq");
+
+	mapa.find("medio")->second.addPortal("Norte", "arriba");
+	mapa.find("medio")->second.addPortal("Sur", "abajo");
+	mapa.find("medio")->second.addPortal("Oeste", "medioIzq");
+	mapa.find("medio")->second.addPortal("Este", "medioDer");
+
+	mapa.find("medioDer")->second.addPortal("Norte", "arribaDer");
+	mapa.find("medioDer")->second.addPortal("Oeste", "medio");
+	mapa.find("medioDer")->second.addPortal("Sur", "abajoDer");
+
+	mapa.find("abajoIzq")->second.addPortal("Norte", "medioIzq");
+	mapa.find("abajoIzq")->second.addPortal("Este", "abajo");
+
+	mapa.find("abajo")->second.addPortal("Norte", "medio");
+	mapa.find("abajo")->second.addPortal("Este", "abajoDer");
+	mapa.find("abajo")->second.addPortal("Oeste", "abajoIzq");
+
+	mapa.find("abajoDer")->second.addPortal("Norte", "medioDer");
+	mapa.find("abajoDer")->second.addPortal("Oeste", "abajo");
 }
 void Mapa::leerMapa() {
 	try
