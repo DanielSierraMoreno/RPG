@@ -42,10 +42,6 @@ int main() {
 			mapa.pintarMapa();
 		}
 
-
-
-
-
 	}
 
 }

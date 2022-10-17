@@ -1,5 +1,6 @@
 #pragma once
 #include "ConsoleControl.h"
+#include <json/json.h>
 
 class Enemy
 {

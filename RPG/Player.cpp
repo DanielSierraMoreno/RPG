@@ -1,7 +1,8 @@
 #include "Player.h"
 #include "ConsoleControl.h"
 #include "Sala.h"
-
+#include <iostream>
+#include <fstream>
 #include <thread>
 
 
@@ -36,6 +37,57 @@ void Player::upgradeWeapon() {
 	consoleControl.SetPosition(50, 7);
 	std::cout << "Arma: " << weapon;
 
+}
+
+
+
+static Player* Parse(Json::Value jsonValue)
+{
+    Player* newCharacter = new Player();
+    try
+    {
+
+        newCharacter->vidas = jsonValue["life"].asInt();
+        newCharacter->monedas = jsonValue["coins"].asInt();
+
+       /* Json::Value weaponsArray = Json::Value(Json::arrayValue);
+        weaponsArray = jsonValue["weapons"];
+
+        for (int i = 0; i < weaponsArray.size(); i++)
+        {
+            Json::Value weaponJson = weaponsArray[i];
+            Weapon* newWeapon = Weapon::Parse(weaponJson);
+
+            if (newWeapon != nullptr)
+            {
+                newCharacter->weapons->push_back(newWeapon);
+            }
+        }*/
+
+        return newCharacter;
+    }
+    catch (const std::exception&)
+    {
+        delete newCharacter;
+        return nullptr;
+    }
+}
+
+void Player::writeToJson()
+{
+    std::ifstream* jsonReadFile = new std::ifstream("Player.json", std::ifstream::binary);
+
+
+
+}
+
+Json::Value Player::ToJsonValue()
+{
+    Json::Value jsonValue;
+
+    jsonValue["life"] = this->vidas;
+    jsonValue["coins"] = this->monedas;
+    return jsonValue;
 }
 
 void Player::usePotion() {

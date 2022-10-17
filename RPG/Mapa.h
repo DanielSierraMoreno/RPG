@@ -1,6 +1,7 @@
 #pragma once
 #include <map>
 #include "Sala.h"
+#include <json/json.h>
 
 class Mapa
 {
