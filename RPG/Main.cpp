@@ -19,6 +19,11 @@ int main() {
 	mapa.leerMapa();
 	mapa.zona = "medio";
 
+		std::thread playerMove(&Mapa::playerInputs, &mapa, &inputManager);
+			playerMove.detach();
+
+			std::thread creadorCofreEnemigo(&Mapa::eventoSala, &mapa);
+			creadorCofreEnemigo.detach();
 
 
 	mapa.pintarMapa();
@@ -27,6 +32,7 @@ int main() {
 
 	while (gameloop)
 	{
+
 		if (mapa.salaActual()->location != "") {
 			std::string loc = mapa.salaActual()->location;
 			mapa.salaActual()->location = "";
@@ -35,8 +41,7 @@ int main() {
 			mapa.pintarMapa();
 		}
 
-		std::thread playerMove(&Sala::playerInputs, mapa.salaActual(), inputManager);
-			playerMove.detach();
+
 
 
 

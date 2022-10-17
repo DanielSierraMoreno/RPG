@@ -76,3 +76,218 @@ void Mapa::pintarMapa() {
 
 	mapa.find(zona)->second.pintarSala();
 }
+
+void Mapa::playerInputs(InputManager* inputs) {
+
+
+	while (true)
+	{
+
+		switch (inputs->GetKey())
+		{
+		case KB_UP:
+			player->playerState = Player::UP;
+			break;
+		case KB_DOWN:
+			player->playerState = Player::DOWN;
+
+			break;
+		case KB_LEFT:
+			player->playerState = Player::LEFT;
+
+			break;
+		case KB_RIGHT:
+			player->playerState = Player::RIGHT;
+
+			break;
+		case KB_SPACE:
+			player->playerState = Player::POTION;
+
+			break;
+		default:
+			break;
+		}
+
+		playerAction();
+	}
+
+}
+
+void Mapa::playerAction() {
+
+
+	switch (player->playerState)
+	{
+	case Player::UP:
+	{
+		if (salaActual()->sala[player->y - 1][player->x] == '#')break;
+		else if (salaActual()->sala[player->y - 1][player->x] == 'E')
+		{
+
+		}
+		else if (salaActual()->sala[player->y - 1][player->x] == 'C')
+		{
+
+		}
+		else if (salaActual()->sala[player->y - 1][player->x] == 'O')
+		{
+			salaActual()->location = salaActual()->locations.find("Norte")->second;
+			player->y += salaActual()->sizeY - 3;
+		}
+		else
+		{
+			player->consoleControl.LockMutex();
+
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << ' ';
+			player->y--;
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << player->player;
+
+			player->consoleControl.UnlockMutex();
+
+		}
+		player->playerState = Player::STAY;
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		break;
+	}
+	case Player::RIGHT:
+	{
+		if (salaActual()->sala[player->y][player->x + 1] == '#')break;
+		else if (salaActual()->sala[player->y][player->x + 1] == 'E')
+		{
+
+		}
+		else if (salaActual()->sala[player->y][player->x + 1] == 'C')
+		{
+
+		}
+		else if (salaActual()->sala[player->y][player->x + 1] == 'O')
+		{
+			salaActual()->location = salaActual()->locations.find("Este")->second;
+			player->x -= salaActual()->sizeX - 4;
+
+		}
+		else
+		{
+			player->consoleControl.LockMutex();
+
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << ' ';
+			player->x++;
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << player->player;
+
+			player->consoleControl.UnlockMutex();
+
+		}
+		player->playerState = Player::STAY;
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		break;
+	}
+	case Player::LEFT:
+	{
+		if (salaActual()->sala[player->y][player->x - 1] == '#')break;
+		else if (salaActual()->sala[player->y][player->x - 1] == 'E')
+		{
+
+		}
+		else if (salaActual()->sala[player->y][player->x - 1] == 'C')
+		{
+
+		}
+		else if (salaActual()->sala[player->y][player->x - 1] == 'O')
+		{
+			salaActual()->location = salaActual()->locations.find("Oeste")->second;
+			player->x += salaActual()->sizeX - 4;
+
+		}
+		else
+		{
+			player->consoleControl.LockMutex();
+
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << ' ';
+			player->x--;
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << player->player;
+
+			player->consoleControl.UnlockMutex();
+
+		}
+		player->playerState = Player::STAY;
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		break;
+	}
+	case Player::DOWN:
+	{
+		if (salaActual()->sala[player->y + 1][player->x] == '#')break;
+		else if (salaActual()->sala[player->y + 1][player->x] == 'E')
+		{
+
+		}
+		else if (salaActual()->sala[player->y + 1][player->x] == 'C')
+		{
+
+		}
+		else if (salaActual()->sala[player->y + 1][player->x] == 'O')
+		{
+			salaActual()->location = salaActual()->locations.find("Sur")->second;
+			player->y -= salaActual()->sizeY - 3;
+
+		}
+		else
+		{
+			player->consoleControl.LockMutex();
+
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << ' ';
+			player->y++;
+			player->consoleControl.SetPosition(player->x, player->y);
+			std::cout << player->player;
+
+			player->consoleControl.UnlockMutex();
+
+		}
+		player->playerState = Player::STAY;
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		break;
+	}
+	case Player::POTION:
+	{
+
+
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+
+void Mapa::eventoSala() {
+	
+	while (true)
+	{
+	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+
+	switch ((int)rand()% 2)
+	{
+	case 0:
+		salaActual()->crearCofre();
+		break;
+	case 1:
+		salaActual()->crearEnemigo();
+		break;
+	default:
+		break;
+	}
+	}
+
+
+
+}

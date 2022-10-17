@@ -15,6 +15,11 @@ public:
 	void pintarMapa();
 	Sala* salaActual() { return &mapa.find(zona)->second; }
 
+	void playerInputs(InputManager* inputs);
+	void playerAction();
+
+	void eventoSala();
+
 	void leerPlayer();
 	void leerZona();
 	void guardarPlayer();

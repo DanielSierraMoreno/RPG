@@ -13,10 +13,11 @@ private:
 	std::string fileName;
 	std::vector<Enemy> enemies;
 	std::vector<Cofre> cofres;
+
+public:		
 	std::map<string, string> locations;
 	int sizeX = 34; 
 	int sizeY = 13;
-public:	
 	std::string location;
 	char** sala = new char*[sizeY];
 	Player* player;
@@ -25,8 +26,8 @@ public:
 	void pintarSala();
 	void crearCofre();
 	void crearEnemigo();
-	void playerInputs(InputManager inputs);
-	void playerAction();
+	
+	void pintarElementos();
 	void addPortal(string loc, string sala) { locations.insert({loc, sala}); }
 
 	void leerEnemigos();
