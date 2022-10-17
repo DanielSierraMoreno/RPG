@@ -1,13 +1,15 @@
 #pragma once
+#include "ConsoleControl.h"
+
 class Enemy
 {
 private:
-
-public:
+	ConsoleControl consoleControl;
+public:	
 	int x;
 	int y;
+	bool inMovement = true;
 	char enemigo = 'E';
-
 	void moveEnemy();
 };
 

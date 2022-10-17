@@ -28,18 +28,25 @@ void Sala::pintarSala() {
 	}
 	for (int i = 0; i < enemies.size(); i++) {
 
-		std::thread playerMove();
+		enemies[i].inMovement = true;
+		std::thread enemyThread(&Enemy::moveEnemy, &enemies[i]);
+		enemyThread.detach();
 
-		sala[enemies[i].y][enemies[i].x] = enemies[i].enemigo;
 	}
 	for (int y = 0; y < sizeY; y++) {
 		for (int x = 0; x < sizeX; x++) {
 			std::cout << sala[y][x];
 		}
 	}
+	player->consoleControl.LockMutex();
+
 	player->consoleControl.SetPosition(player->x, player->y);
 	std::cout << player->player;
+
+	player->consoleControl.UnlockMutex();
+
 }
+
 void Sala::crearCofre() {
 	Cofre cofre;
 	bool espacioIncorrecto = true;
@@ -47,8 +54,8 @@ void Sala::crearCofre() {
 	int x;
 	while (espacioIncorrecto) {
 		x = rand() % (sizeX-2) + 1;
-		y = rand() % 1 + (sizeY-2);
-		if (sala[y][x] == ' ' && sala[y][x] == 'E' && sala[y][x] == 'C' && sala[y][x] == 'I' && sala[y][x] == '#')
+		y = rand() % (sizeY-2) + 1;
+		if (sala[y][x] == ' ')
 		{
 			if (y == player->y - 1 && x == player->x - 1) {}
 			else if (y == player->y - 1 && x == player->x) {}
@@ -69,8 +76,13 @@ void Sala::crearCofre() {
 
 	cofres.push_back(cofre);
 
+	player->consoleControl.LockMutex();
+
 	player->consoleControl.SetPosition(cofre.x, cofre.y);
 	std::cout << cofre.cofre;
+
+	player->consoleControl.UnlockMutex();
+
 }
 void Sala::crearEnemigo() {
 	Enemy enemy;
@@ -79,8 +91,8 @@ void Sala::crearEnemigo() {
 	int x;
 	while (espacioIncorrecto) {
 		x = rand() % (sizeX-2) + 1;
-		y = rand() % 1 + (sizeY-2);
-		if (sala[y][x] == ' ' && sala[y][x] == 'E' && sala[y][x] == 'C' && sala[y][x] == 'I' && sala[y][x] == '#')
+		y = rand() % (sizeY-2) + 1;
+		if (sala[y][x] == ' ')
 		{
 			if (y == player->y - 1 && x == player->x - 1) {}
 			else if (y == player->y - 1 && x == player->x) {}
@@ -99,15 +111,20 @@ void Sala::crearEnemigo() {
 	enemy.x = x;
 	enemy.y = y;
 
+	std::thread enemyThread(&Enemy::moveEnemy, &enemy);
+	enemyThread.detach();
+
 	enemies.push_back(enemy);
 }
 
-void Sala::pintarElementos() {
-
+void Sala::salirSala() {
 	for (int i = 0; i < enemies.size(); i++) {
-		sala[enemies[i].y][enemies[i].x] = enemies[i].enemigo;
+
+		enemies[i].inMovement = false;
+
 	}
 }
+
 
 
 void Sala::leerEnemigos() {

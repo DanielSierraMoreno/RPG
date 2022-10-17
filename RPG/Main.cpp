@@ -34,6 +34,7 @@ int main() {
 	{
 
 		if (mapa.salaActual()->location != "") {
+			mapa.salaActual()->salirSala();
 			std::string loc = mapa.salaActual()->location;
 			mapa.salaActual()->location = "";
 			mapa.zona = loc;
