@@ -5,11 +5,13 @@
 class Player
 {
 private:
-	int vidas;
+
+	
+public:	
+	int vidas = 3;
 	int monedas;
 	int pociones;
-
-public:	
+	std::string weapon = "espada";
 	ConsoleControl consoleControl;
 
 	enum PlayerState{UP,RIGHT,LEFT,DOWN,STAY,POTION};
@@ -18,7 +20,14 @@ public:
 	int x;
 	int y;
 	char player;
-	Player() { x = 16; y = 6; playerState = STAY; player = 'P'; }
+	Player() { x = 16; y = 6; playerState = STAY; player = 'J'; }
 
+	void addCoin();
+	void addPotion();
+	void addLife();
+
+	void usePotion();
+
+	void upgradeWeapon();
 };
 

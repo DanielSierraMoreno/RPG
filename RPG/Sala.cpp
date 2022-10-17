@@ -28,9 +28,6 @@ void Sala::pintarSala() {
 	}
 	for (int i = 0; i < enemies.size(); i++) {
 
-		enemies[i].inMovement = true;
-		std::thread enemyThread(&Enemy::moveEnemy, &enemies[i]);
-		enemyThread.detach();
 
 	}
 	for (int y = 0; y < sizeY; y++) {
@@ -42,6 +39,18 @@ void Sala::pintarSala() {
 
 	player->consoleControl.SetPosition(player->x, player->y);
 	std::cout << player->player;
+
+	player->consoleControl.SetPosition(50, 1);
+	std::cout << "Vidas: " << player->vidas;
+
+	player->consoleControl.SetPosition(50, 3);
+	std::cout << "Monedas: " << player->monedas;
+
+	player->consoleControl.SetPosition(50, 5);
+	std::cout << "Pociones: " << player->pociones;
+
+	player->consoleControl.SetPosition(50, 7);
+	std::cout << "Arma: " << player->weapon;
 
 	player->consoleControl.UnlockMutex();
 
@@ -74,6 +83,7 @@ void Sala::crearCofre() {
 	cofre.x = x;
 	cofre.y = y;
 
+	sala[y][x] = cofre.cofre;
 	cofres.push_back(cofre);
 
 	player->consoleControl.LockMutex();
@@ -111,8 +121,6 @@ void Sala::crearEnemigo() {
 	enemy.x = x;
 	enemy.y = y;
 
-	std::thread enemyThread(&Enemy::moveEnemy, &enemy);
-	enemyThread.detach();
 
 	enemies.push_back(enemy);
 }

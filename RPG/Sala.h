@@ -11,9 +11,10 @@ class Sala
 {
 private:
 	std::string fileName;
+
+public:	
 	std::vector<Enemy> enemies;
 	std::vector<Cofre> cofres;
-public:		
 	std::map<string, string> locations;
 	int sizeX = 34; 
 	int sizeY = 13;

@@ -127,7 +127,13 @@ void Mapa::playerAction() {
 		}
 		else if (salaActual()->sala[player->y - 1][player->x] == 'C')
 		{
-
+			for (int i = 0; i < salaActual()->cofres.size(); i++) {
+				if (player->y - 1 == salaActual()->cofres[i].y && player->x == salaActual()->cofres[i].x)
+				{
+					salaActual()->sala[player->y - 1][player->x] = salaActual()->cofres[i].spawnRandomObject();
+					salaActual()->cofres.erase(salaActual()->cofres.begin()+i);
+				}
+			}
 		}
 		else if (salaActual()->sala[player->y - 1][player->x] == 'O')
 		{
@@ -136,11 +142,23 @@ void Mapa::playerAction() {
 		}
 		else
 		{
+
 			player->consoleControl.LockMutex();
 
 			player->consoleControl.SetPosition(player->x, player->y);
+			salaActual()->sala[player->y][player->x] = ' ';
 			std::cout << ' ';
 			player->y--;
+
+			if (salaActual()->sala[player->y][player->x] == 'M') {
+				player->addCoin();
+			}
+			else if (salaActual()->sala[player->y][player->x] == 'P') {
+				player->addPotion();
+			}
+			else if (salaActual()->sala[player->y][player->x] == 'A') {
+				player->upgradeWeapon();
+			}
 			player->consoleControl.SetPosition(player->x, player->y);
 			std::cout << player->player;
 
@@ -149,7 +167,7 @@ void Mapa::playerAction() {
 		}
 		player->playerState = Player::STAY;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		std::this_thread::sleep_for(std::chrono::milliseconds(250));
 		break;
 	}
 	case Player::RIGHT:
@@ -161,7 +179,13 @@ void Mapa::playerAction() {
 		}
 		else if (salaActual()->sala[player->y][player->x + 1] == 'C')
 		{
-
+			for (int i = 0; i < salaActual()->cofres.size(); i++) {
+				if (player->y == salaActual()->cofres[i].y && player->x + 1 == salaActual()->cofres[i].x)
+				{
+					salaActual()->sala[player->y][player->x + 1] = salaActual()->cofres[i].spawnRandomObject();
+					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
+				}
+			}
 		}
 		else if (salaActual()->sala[player->y][player->x + 1] == 'O')
 		{
@@ -174,8 +198,20 @@ void Mapa::playerAction() {
 			player->consoleControl.LockMutex();
 
 			player->consoleControl.SetPosition(player->x, player->y);
+			salaActual()->sala[player->y][player->x] = ' ';
 			std::cout << ' ';
 			player->x++;
+
+			if (salaActual()->sala[player->y][player->x] == 'M') {
+				player->addCoin();
+			}
+			else if (salaActual()->sala[player->y][player->x] == 'P') {
+				player->addPotion();
+			}
+			else if (salaActual()->sala[player->y][player->x] == 'A') {
+				player->upgradeWeapon();
+			}
+
 			player->consoleControl.SetPosition(player->x, player->y);
 			std::cout << player->player;
 
@@ -184,7 +220,7 @@ void Mapa::playerAction() {
 		}
 		player->playerState = Player::STAY;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		std::this_thread::sleep_for(std::chrono::milliseconds(250));
 		break;
 	}
 	case Player::LEFT:
@@ -196,7 +232,13 @@ void Mapa::playerAction() {
 		}
 		else if (salaActual()->sala[player->y][player->x - 1] == 'C')
 		{
-
+			for (int i = 0; i < salaActual()->cofres.size(); i++) {
+				if (player->y == salaActual()->cofres[i].y && player->x - 1 == salaActual()->cofres[i].x)
+				{
+					salaActual()->sala[player->y][player->x - 1] = salaActual()->cofres[i].spawnRandomObject();
+					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
+				}
+			}
 		}
 		else if (salaActual()->sala[player->y][player->x - 1] == 'O')
 		{
@@ -209,8 +251,20 @@ void Mapa::playerAction() {
 			player->consoleControl.LockMutex();
 
 			player->consoleControl.SetPosition(player->x, player->y);
+			salaActual()->sala[player->y][player->x] = ' ';
 			std::cout << ' ';
 			player->x--;
+
+			if (salaActual()->sala[player->y][player->x] == 'M') {
+				player->addCoin();
+			}
+			else if (salaActual()->sala[player->y][player->x] == 'P') {
+				player->addPotion();
+			}
+			else if (salaActual()->sala[player->y][player->x] == 'A') {
+				player->upgradeWeapon();
+			}
+
 			player->consoleControl.SetPosition(player->x, player->y);
 			std::cout << player->player;
 
@@ -219,7 +273,7 @@ void Mapa::playerAction() {
 		}
 		player->playerState = Player::STAY;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		std::this_thread::sleep_for(std::chrono::milliseconds(250));
 		break;
 	}
 	case Player::DOWN:
@@ -231,7 +285,13 @@ void Mapa::playerAction() {
 		}
 		else if (salaActual()->sala[player->y + 1][player->x] == 'C')
 		{
-
+			for (int i = 0; i < salaActual()->cofres.size(); i++) {
+				if (player->y + 1== salaActual()->cofres[i].y && player->x == salaActual()->cofres[i].x)
+				{
+					salaActual()->sala[player->y + 1][player->x] = salaActual()->cofres[i].spawnRandomObject();
+					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
+				}
+			}
 		}
 		else if (salaActual()->sala[player->y + 1][player->x] == 'O')
 		{
@@ -244,8 +304,20 @@ void Mapa::playerAction() {
 			player->consoleControl.LockMutex();
 
 			player->consoleControl.SetPosition(player->x, player->y);
+			salaActual()->sala[player->y][player->x] = ' ';
 			std::cout << ' ';
 			player->y++;
+
+			if (salaActual()->sala[player->y][player->x] == 'M') {
+				player->addCoin();
+			}
+			else if (salaActual()->sala[player->y][player->x] == 'P') {
+				player->addPotion();
+			}
+			else if (salaActual()->sala[player->y][player->x] == 'A') {
+				player->upgradeWeapon();
+			}
+
 			player->consoleControl.SetPosition(player->x, player->y);
 			std::cout << player->player;
 
@@ -254,12 +326,17 @@ void Mapa::playerAction() {
 		}
 		player->playerState = Player::STAY;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		std::this_thread::sleep_for(std::chrono::milliseconds(250));
 		break;
 	}
 	case Player::POTION:
 	{
+		if (player->pociones > 0)
+		{
+		player->usePotion();
 
+		}
+		player->playerState = Player::STAY;
 
 		break;
 	}
@@ -278,10 +355,16 @@ void Mapa::eventoSala() {
 	switch ((int)rand()% 2)
 	{
 	case 0:
+		if (salaActual()->cofres.size() < 5)
+		{
 		salaActual()->crearCofre();
+		}
 		break;
 	case 1:
-		salaActual()->crearEnemigo();
+		if (salaActual()->enemies.size() < 5)
+		{
+			salaActual()->crearEnemigo();
+		}
 		break;
 	default:
 		break;
