@@ -31,7 +31,7 @@ void Player::addLife() {
 
 }
 void Player::upgradeWeapon() {
-	weapon = "lanza";
+	weapon = "lanza ";
 
 
 	consoleControl.SetPosition(50, 7);

@@ -10,7 +10,6 @@ int main() {
 	InputManager inputManager(keys);
 
 	std::thread inputController(&InputManager::StartListener, inputManager);
-
 	inputController.detach();
 
 	Player player;
@@ -19,11 +18,11 @@ int main() {
 	mapa.leerMapa();
 	mapa.zona = "medio";
 
-		std::thread playerMove(&Mapa::playerInputs, &mapa, &inputManager);
-			playerMove.detach();
+	std::thread playerMove(&Mapa::playerInputs, &mapa, &inputManager);
+	playerMove.detach();
 
-			std::thread creadorCofreEnemigo(&Mapa::eventoSala, &mapa);
-			creadorCofreEnemigo.detach();
+	std::thread creadorCofreEnemigo(&Mapa::eventoSala, &mapa);
+	creadorCofreEnemigo.detach();
 
 
 	mapa.pintarMapa();
@@ -32,12 +31,15 @@ int main() {
 
 	while (gameloop)
 	{
+		//Crea un nuevo thread al crear un nuevo enemigo
 		if (mapa.enemigoCreado)
 		{
 			std::thread enemyMove(&Enemy::moveEnemy, mapa.salaActual()->enemies[mapa.salaActual()->enemies.size()-1]);
 			enemyMove.detach();	
 			mapa.enemigoCreado = false;
 		}
+
+		//Cambio de sala al atravesar un portal 
 		if (mapa.salaActual()->location != "") {
 			mapa.salaActual()->salirSala();
 			std::string loc = mapa.salaActual()->location;
