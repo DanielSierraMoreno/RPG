@@ -2,6 +2,7 @@
 #include "Sala.h"
 #include <iostream>
 
+
 void Mapa::crearMapa() {
 	Sala sala0("Mapa/Mapa0.txt");
 	Sala sala1("Mapa/Mapa1.txt");

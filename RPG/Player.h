@@ -1,6 +1,7 @@
 #pragma once
 #include "InputManager.h"
 #include "ConsoleControl.h"
+#include <json/json.h>
 
 class Player
 {
@@ -29,5 +30,12 @@ public:
 	void usePotion();
 
 	void upgradeWeapon();
+
+	void writeToJson();
+
+	static Player* Parse(Json::Value jsonValue);
+
+	Json::Value ToJsonValue();
+	
 };
 
