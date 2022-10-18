@@ -32,7 +32,12 @@ int main() {
 
 	while (gameloop)
 	{
-
+		if (mapa.enemigoCreado)
+		{
+			std::thread enemyMove(&Enemy::moveEnemy, mapa.salaActual()->enemies[mapa.salaActual()->enemies.size()-1]);
+			enemyMove.detach();	
+			mapa.enemigoCreado = false;
+		}
 		if (mapa.salaActual()->location != "") {
 			mapa.salaActual()->salirSala();
 			std::string loc = mapa.salaActual()->location;

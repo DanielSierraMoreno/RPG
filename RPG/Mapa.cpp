@@ -161,6 +161,7 @@ void Mapa::playerAction() {
 			}
 			player->consoleControl.SetPosition(player->x, player->y);
 			std::cout << player->player;
+			salaActual()->sala[player->y][player->x] = 'J';
 
 			player->consoleControl.UnlockMutex();
 
@@ -214,6 +215,7 @@ void Mapa::playerAction() {
 
 			player->consoleControl.SetPosition(player->x, player->y);
 			std::cout << player->player;
+			salaActual()->sala[player->y][player->x] = 'J';
 
 			player->consoleControl.UnlockMutex();
 
@@ -267,6 +269,7 @@ void Mapa::playerAction() {
 
 			player->consoleControl.SetPosition(player->x, player->y);
 			std::cout << player->player;
+			salaActual()->sala[player->y][player->x] = 'J';
 
 			player->consoleControl.UnlockMutex();
 
@@ -320,6 +323,7 @@ void Mapa::playerAction() {
 
 			player->consoleControl.SetPosition(player->x, player->y);
 			std::cout << player->player;
+			salaActual()->sala[player->y][player->x] = 'J';
 
 			player->consoleControl.UnlockMutex();
 
@@ -350,7 +354,7 @@ void Mapa::eventoSala() {
 	
 	while (true)
 	{
-	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(rand()%2000 + 4000));
 
 	switch ((int)rand()% 2)
 	{
@@ -364,6 +368,7 @@ void Mapa::eventoSala() {
 		if (salaActual()->enemies.size() < 5)
 		{
 			salaActual()->crearEnemigo();
+			enemigoCreado = true;
 		}
 		break;
 	default:
