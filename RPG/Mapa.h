@@ -7,7 +7,6 @@ class Mapa
 {
 private:
 public:	
-	bool enemigoCreado = false;
 	std::map<std::string, Sala> mapa;
 	Player* player;
 	std::string zona;
