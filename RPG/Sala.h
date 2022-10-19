@@ -13,7 +13,7 @@ private:
 	std::string fileName;
 
 public:	
-	std::vector<Enemy> enemies;
+	std::vector<Enemy*>* enemies = new std::vector<Enemy*>();
 	std::vector<Cofre> cofres;
 	std::map<string, string> locations;
 	int sizeX = 34; 

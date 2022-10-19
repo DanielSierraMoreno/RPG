@@ -21,7 +21,7 @@ public:
 	int x;
 	int y;
 	char player;
-	Player() { x = 16; y = 6; playerState = STAY; player = 'J'; }
+	Player() { x = 16; y = 6; playerState = STAY; player = 'J'; monedas = 0; }
 
 	void addCoin();
 	void addPotion();

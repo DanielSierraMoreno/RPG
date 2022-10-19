@@ -49,6 +49,10 @@ static Player* Parse(Json::Value jsonValue)
 
         newPlayer->vidas = jsonValue["life"].asInt();
         newPlayer->monedas = jsonValue["coins"].asInt();
+        newPlayer->pociones = jsonValue["potions"].asInt();
+        newPlayer->x = jsonValue["posX"].asInt();
+        newPlayer->y = jsonValue["posY"].asInt();
+        newPlayer->weapon = jsonValue["weapon"].asString();
 
        /* Json::Value weaponsArray = Json::Value(Json::arrayValue);
         weaponsArray = jsonValue["weapons"];
@@ -115,6 +119,11 @@ Json::Value Player::ToJsonValue()
 
     jsonValue["life"] = this->vidas;
     jsonValue["coins"] = this->monedas;
+    jsonValue["potions"] = this->pociones;
+    jsonValue["posX"] = this->x;
+    jsonValue["posY"] = this->y;
+    jsonValue["weapon"] = this->weapon;
+
     return jsonValue;
 }
 
