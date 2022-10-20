@@ -25,7 +25,7 @@ void Sala::leerSala() {
 void Sala::pintarSala() {
 	for (int i = 0; i < enemies->size(); i++) {
 		((*enemies)[i])->inMovement = true;
-		std::thread* enemyMove = new std::thread(&Enemy::moveEnemy, (*enemies)[i]);
+		std::thread* enemyMove = new std::thread(&Enemy::moveEnemy, (*enemies)[i], this);
 		enemyMove->detach();
 
 	}
@@ -128,7 +128,7 @@ void Sala::crearEnemigo() {
 
 	enemies->push_back(enemy);
 
-	std::thread*  enemyMove = new std::thread(&Enemy::moveEnemy, enemy);
+	std::thread*  enemyMove = new std::thread(&Enemy::moveEnemy, enemy, this);
 	enemyMove->detach();
 }
 

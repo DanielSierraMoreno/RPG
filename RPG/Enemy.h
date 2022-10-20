@@ -1,6 +1,7 @@
 #pragma once
 #include "ConsoleControl.h"
 #include <json/json.h>
+#include "Sala.h"
 
 class Enemy
 {
@@ -11,6 +12,6 @@ public:
 	int y;
 	bool inMovement = true;
 	char enemigo = 'E';
-	void moveEnemy();
+	void moveEnemy(Sala* sala);
 };
 

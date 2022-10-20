@@ -4,6 +4,7 @@
 #include <thread>
 
 int main() {
+	srand(time(NULL));
 	//Teclas posibles
 	vector<int> keys{ KB_UP , KB_DOWN , KB_LEFT , KB_RIGHT , KB_SPACE };
 
