@@ -4,17 +4,23 @@
 #include <iostream>
 
 
-void Enemy::moveEnemy() {
+void Enemy::moveEnemy(Sala* player) {
 
 	while (inMovement)
 	{
     consoleControl.LockMutex();
+
+
+
 	consoleControl.SetPosition(x,y);
 	std::cout << enemigo;
 	x++;
+
+
+
 	consoleControl.UnlockMutex();
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
 	}
 

@@ -24,7 +24,8 @@ void Sala::leerSala() {
 
 void Sala::pintarSala() {
 	for (int i = 0; i < enemies.size(); i++) {
-		enemies.at(i).inMovement = true;
+		enemies[i].inMovement = true;
+
 		std::thread enemyMove(&Enemy::moveEnemy, &enemies[i]);
 		enemyMove.detach();
 
@@ -33,12 +34,14 @@ void Sala::pintarSala() {
 		sala[cofres[i].y][cofres[i].x] = cofres[i].cofre;
 	}
 
+	player->consoleControl.LockMutex();
+
 	for (int y = 0; y < sizeY; y++) {
 		for (int x = 0; x < sizeX; x++) {
 			std::cout << sala[y][x];
 		}
 	}
-	player->consoleControl.LockMutex();
+
 
 	player->consoleControl.SetPosition(player->x, player->y);
 	std::cout << player->player;
@@ -125,14 +128,21 @@ void Sala::crearEnemigo() {
 	enemy.y = y;
 
 
-
-	enemies.push_back(enemy);
+	enemies.push_back(enemy);	
+	crearThreadEnemigo();
 }
+
+void Sala::crearThreadEnemigo() {
+
+	std::thread enemyMove(&Enemy::moveEnemy, &enemies[]);
+	enemyMove.detach();
+}
+
 
 void Sala::salirSala() {
 	for (int i = 0; i < enemies.size(); i++) {
 
-		enemies.at(i).inMovement = false;
+		enemies[i].inMovement = false;
 
 	}
 }

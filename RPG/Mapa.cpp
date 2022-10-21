@@ -369,7 +369,6 @@ void Mapa::eventoSala() {
 		if (salaActual()->enemies.size() < 5)
 		{
 			salaActual()->crearEnemigo();
-			enemigoCreado = true;
 		}
 		break;
 	default:
