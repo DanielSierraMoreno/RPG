@@ -148,6 +148,32 @@ void Mapa::playerAction() {
 				}
 			}
 		}
+		else if (salaActual()->sala[player->y - 2][player->x] == 'E' && salaActual()->player->weapon == "lanza")
+		{
+			for (int i = 0; i < salaActual()->enemies->size(); i++) {
+				if (player->y - 2 == (*salaActual()->enemies)[i]->y && player->x == (*salaActual()->enemies)[i]->x)
+				{
+					(*salaActual()->enemies)[i]->receiveDamage();
+
+					if ((*salaActual()->enemies)[i]->vida <= 0)
+					{
+						(*salaActual()->enemies)[i]->inMovement = false;
+						salaActual()->spawnRandomObject((*salaActual()->enemies)[i]->x, (*salaActual()->enemies)[i]->y);
+						salaActual()->enemies->erase(salaActual()->enemies->begin() + i);
+					}
+				}
+			}
+		}
+		else if (salaActual()->sala[player->y - 2][player->x] == 'C' && salaActual()->player->weapon == "lanza")
+		{
+			for (int i = 0; i < salaActual()->cofres.size(); i++) {
+				if (player->y - 2 == salaActual()->cofres[i].y && player->x == salaActual()->cofres[i].x)
+				{
+					salaActual()->spawnRandomObject(salaActual()->cofres[i].x, salaActual()->cofres[i].y);
+					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
+				}
+			}
+		}
 		else if (salaActual()->sala[player->y - 1][player->x] == 'O')
 		{
 			salaActual()->location = salaActual()->locations.find("Norte")->second;
@@ -207,6 +233,32 @@ void Mapa::playerAction() {
 		{
 			for (int i = 0; i < salaActual()->cofres.size(); i++) {
 				if (player->y == salaActual()->cofres[i].y && player->x + 1 == salaActual()->cofres[i].x)
+				{
+					salaActual()->spawnRandomObject(salaActual()->cofres[i].x, salaActual()->cofres[i].y);
+					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
+				}
+			}
+		}
+		else if (salaActual()->sala[player->y][player->x + 2] == 'E' && salaActual()->player->weapon == "lanza")
+		{
+			for (int i = 0; i < salaActual()->enemies->size(); i++) {
+				if (player->y == (*salaActual()->enemies)[i]->y && player->x + 2 == (*salaActual()->enemies)[i]->x)
+				{
+					(*salaActual()->enemies)[i]->receiveDamage();
+
+					if ((*salaActual()->enemies)[i]->vida <= 0)
+					{
+						(*salaActual()->enemies)[i]->inMovement = false;
+						salaActual()->spawnRandomObject((*salaActual()->enemies)[i]->x, (*salaActual()->enemies)[i]->y);
+						salaActual()->enemies->erase(salaActual()->enemies->begin() + i);
+					}
+				}
+			}
+		}
+		else if (salaActual()->sala[player->y][player->x + 2] == 'C' && salaActual()->player->weapon == "lanza")
+		{
+			for (int i = 0; i < salaActual()->cofres.size(); i++) {
+				if (player->y == salaActual()->cofres[i].y && player->x + 2 == salaActual()->cofres[i].x)
 				{
 					salaActual()->spawnRandomObject(salaActual()->cofres[i].x, salaActual()->cofres[i].y);
 					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
@@ -279,6 +331,32 @@ void Mapa::playerAction() {
 				}
 			}
 		}
+		else if (salaActual()->sala[player->y][player->x - 2] == 'E' && salaActual()->player->weapon == "lanza")
+		{
+			for (int i = 0; i < salaActual()->enemies->size(); i++) {
+				if (player->y == (*salaActual()->enemies)[i]->y && player->x - 2 == (*salaActual()->enemies)[i]->x)
+				{
+					(*salaActual()->enemies)[i]->receiveDamage();
+
+					if ((*salaActual()->enemies)[i]->vida <= 0)
+					{
+						(*salaActual()->enemies)[i]->inMovement = false;
+						salaActual()->spawnRandomObject((*salaActual()->enemies)[i]->x, (*salaActual()->enemies)[i]->y);
+						salaActual()->enemies->erase(salaActual()->enemies->begin() + i);
+					}
+				}
+			}
+		}
+		else if (salaActual()->sala[player->y][player->x - 2] == 'C' && salaActual()->player->weapon == "lanza")
+		{
+			for (int i = 0; i < salaActual()->cofres.size(); i++) {
+				if (player->y == salaActual()->cofres[i].y && player->x - 2 == salaActual()->cofres[i].x)
+				{
+					salaActual()->spawnRandomObject(salaActual()->cofres[i].x, salaActual()->cofres[i].y);
+					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
+				}
+			}
+		}
 		else if (salaActual()->sala[player->y][player->x - 1] == 'O')
 		{
 			salaActual()->location = salaActual()->locations.find("Oeste")->second;
@@ -345,6 +423,32 @@ void Mapa::playerAction() {
 				}
 			}
 		}
+		else if (salaActual()->sala[player->y + 2][player->x] == 'E' && salaActual()->player->weapon == "lanza")
+		{
+			for (int i = 0; i < salaActual()->enemies->size(); i++) {
+				if (player->y + 2 == (*salaActual()->enemies)[i]->y && player->x == (*salaActual()->enemies)[i]->x)
+				{
+					(*salaActual()->enemies)[i]->receiveDamage();
+
+					if ((*salaActual()->enemies)[i]->vida <= 0)
+					{
+						(*salaActual()->enemies)[i]->inMovement = false;
+						salaActual()->spawnRandomObject((*salaActual()->enemies)[i]->x, (*salaActual()->enemies)[i]->y);
+						salaActual()->enemies->erase(salaActual()->enemies->begin() + i);
+					}
+				}
+			}
+		}
+		else if (salaActual()->sala[player->y + 2][player->x] == 'C' && salaActual()->player->weapon == "lanza")
+		{
+			for (int i = 0; i < salaActual()->cofres.size(); i++) {
+				if (player->y + 2 == salaActual()->cofres[i].y && player->x == salaActual()->cofres[i].x)
+				{
+					salaActual()->spawnRandomObject(salaActual()->cofres[i].x, salaActual()->cofres[i].y);
+					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
+				}
+			}
+		}
 		else if (salaActual()->sala[player->y + 1][player->x] == 'O')
 		{
 			salaActual()->location = salaActual()->locations.find("Sur")->second;
@@ -401,6 +505,8 @@ void Mapa::playerAction() {
 
 void Mapa::eventoSala() {
 	
+	srand(time(NULL));
+
 	while (true)
 	{
 	std::this_thread::sleep_for(std::chrono::milliseconds(rand()%2000 + 4000));

@@ -15,7 +15,7 @@ public:
 
 	bool gameloop;
 
-	std::string weapon = "espada";
+	std::string weapon = "lanza";
 	ConsoleControl consoleControl;
 
 	enum PlayerState{UP,RIGHT,LEFT,DOWN,STAY,POTION};

@@ -27,11 +27,9 @@ public:
 	void pintarSala();
 	void crearCofre();
 	void crearEnemigo();
-	void crearThreadEnemigo();
 	void salirSala();
 	void spawnRandomObject(int x, int y);
 
-	void pintarElementos();
 	void addPortal(string loc, string sala) { locations.insert({loc, sala}); }
 
 	void leerEnemigos();
