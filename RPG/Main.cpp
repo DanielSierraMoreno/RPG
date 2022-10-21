@@ -33,17 +33,7 @@ int main() {
 	while (gameloop)
 	{
 		//Crea un nuevo thread al crear un nuevo enemigo
-	
-		{
-			std::thread enemyMove(&Enemy::moveEnemy, mapa.salaActual()->enemies[mapa.salaActual()->enemies.size()-1]);
-			enemyMove.detach();	
-			mapa.enemigoCreado = false;
-		}
-		{
-			std::thread enemyMove(&Enemy::moveEnemy, mapa.salaActual()->enemies[mapa.salaActual()->enemies.size()-1]);
-			enemyMove.detach();	
-			mapa.enemigoCreado = false;
-		}
+
 
 		//Cambio de sala al atravesar un portal 
 		if (mapa.salaActual()->location != "") {
