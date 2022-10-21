@@ -67,7 +67,9 @@ void Enemy::moveEnemy(Sala* sala) {
 					{
 						drawEnemy(1, 0, sala);
 					}
-				}
+				}	
+				caminoBloqueado = true;
+
 			}
 		}
 		else
@@ -138,6 +140,23 @@ void Enemy::moveEnemy(Sala* sala) {
 			else if (sala->sala[y][x+1] == 'J')
 			{
 				attackPlayer(sala->player);
+			}
+			else
+			{
+				if ((sala->player->y - y) < 0)
+				{
+					if (sala->sala[y - 1][x] == ' ')
+					{
+						drawEnemy(0, -1, sala);
+					}
+				}
+				else
+				{
+					if (sala->sala[y + 1][x] == ' ')
+					{
+						drawEnemy(0, 1, sala);
+					}
+				}
 			}
 		}
 	}

@@ -13,6 +13,7 @@ public:
 	int x;
 	int y;
 	int vida;
+	bool caminoBloqueado = false;
 	bool inMovement = true;
 	Enemy() { vida = 2; }
 	char enemigo = 'E';
