@@ -23,11 +23,10 @@ void Sala::leerSala() {
 }
 
 void Sala::pintarSala() {
-	for (int i = 0; i < enemies.size(); i++) {
-		enemies[i].inMovement = true;
-
-		std::thread enemyMove(&Enemy::moveEnemy, &enemies[i]);
-		enemyMove.detach();
+	for (int i = 0; i < enemies->size(); i++) {
+		((*enemies)[i])->inMovement = true;
+		std::thread* enemyMove = new std::thread(&Enemy::moveEnemy, (*enemies)[i], this);
+		enemyMove->detach();
 
 	}
 	for (int i = 0; i < cofres.size(); i++) {
@@ -101,7 +100,7 @@ void Sala::crearCofre() {
 
 }
 void Sala::crearEnemigo() {
-	Enemy enemy;
+	Enemy* enemy = new Enemy();
 	bool espacioIncorrecto = true;
 	int y;
 	int x;
@@ -124,25 +123,22 @@ void Sala::crearEnemigo() {
 			}
 		}
 	}
-	enemy.x = x;
-	enemy.y = y;
+	enemy->x = x;
+	enemy->y = y;
 
 
-	enemies.push_back(enemy);	
-	crearThreadEnemigo();
-}
 
-void Sala::crearThreadEnemigo() {
+	enemies->push_back(enemy);
 
-	std::thread enemyMove(&Enemy::moveEnemy, &enemies[]);
-	enemyMove.detach();
+	std::thread*  enemyMove = new std::thread(&Enemy::moveEnemy, enemy, this);
+	enemyMove->detach();
 }
 
 
 void Sala::salirSala() {
-	for (int i = 0; i < enemies.size(); i++) {
+	for (int i = 0; i < enemies->size(); i++) {
 
-		enemies[i].inMovement = false;
+		((*enemies)[i])->inMovement = false;
 
 	}
 }

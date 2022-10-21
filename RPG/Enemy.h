@@ -3,6 +3,7 @@
 #include "Sala.h"
 
 #include <json/json.h>
+#include "Sala.h"
 
 class Enemy
 {
@@ -13,6 +14,6 @@ public:
 	int y;
 	bool inMovement = true;
 	char enemigo = 'E';
-	void moveEnemy(Sala* player);
+	void moveEnemy(Sala* sala);
 };
 

@@ -366,7 +366,7 @@ void Mapa::eventoSala() {
 		}
 		break;
 	case 1:
-		if (salaActual()->enemies.size() < 5)
+		if (salaActual()->enemies->size() < 5)
 		{
 			salaActual()->crearEnemigo();
 		}

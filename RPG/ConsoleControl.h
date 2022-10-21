@@ -29,7 +29,7 @@
 #define KB_8 56
 #define KB_9 57
 
-static class ConsoleControl {
+class ConsoleControl {
 private:
 	std::mutex* consoleMutex = new std::mutex();
 protected:

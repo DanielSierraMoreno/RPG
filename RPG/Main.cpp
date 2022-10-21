@@ -4,6 +4,7 @@
 #include <thread>
 
 int main() {
+	srand(time(NULL));
 	//Teclas posibles
 	vector<int> keys{ KB_UP , KB_DOWN , KB_LEFT , KB_RIGHT , KB_SPACE };
 
@@ -32,7 +33,17 @@ int main() {
 	while (gameloop)
 	{
 		//Crea un nuevo thread al crear un nuevo enemigo
-
+	
+		{
+			std::thread enemyMove(&Enemy::moveEnemy, mapa.salaActual()->enemies[mapa.salaActual()->enemies.size()-1]);
+			enemyMove.detach();	
+			mapa.enemigoCreado = false;
+		}
+		{
+			std::thread enemyMove(&Enemy::moveEnemy, mapa.salaActual()->enemies[mapa.salaActual()->enemies.size()-1]);
+			enemyMove.detach();	
+			mapa.enemigoCreado = false;
+		}
 
 		//Cambio de sala al atravesar un portal 
 		if (mapa.salaActual()->location != "") {
