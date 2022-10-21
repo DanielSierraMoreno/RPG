@@ -81,7 +81,7 @@ void Mapa::pintarMapa() {
 void Mapa::playerInputs(InputManager* inputs) {
 
 
-	while (true)
+	while (player->gameloop)
 	{
 
 		switch (inputs->GetKey())
@@ -124,14 +124,26 @@ void Mapa::playerAction() {
 		if (salaActual()->sala[player->y - 1][player->x] == '#')break;
 		else if (salaActual()->sala[player->y - 1][player->x] == 'E')
 		{
+			for (int i = 0; i < salaActual()->enemies->size(); i++) {
+				if (player->y - 1 == (*salaActual()->enemies)[i]->y && player->x == (*salaActual()->enemies)[i]->x)
+				{
+					(*salaActual()->enemies)[i]->receiveDamage();
 
+					if ((*salaActual()->enemies)[i]->vida <= 0)
+					{
+						(*salaActual()->enemies)[i]->inMovement = false;
+						salaActual()->spawnRandomObject((*salaActual()->enemies)[i]->x, (*salaActual()->enemies)[i]->y);
+						salaActual()->enemies->erase(salaActual()->enemies->begin() + i);
+					}
+				}
+			}
 		}
 		else if (salaActual()->sala[player->y - 1][player->x] == 'C')
 		{
 			for (int i = 0; i < salaActual()->cofres.size(); i++) {
 				if (player->y - 1 == salaActual()->cofres[i].y && player->x == salaActual()->cofres[i].x)
 				{
-					salaActual()->sala[player->y - 1][player->x] = salaActual()->cofres[i].spawnRandomObject();
+					salaActual()->spawnRandomObject(salaActual()->cofres[i].x, salaActual()->cofres[i].y);
 					salaActual()->cofres.erase(salaActual()->cofres.begin()+i);
 				}
 			}
@@ -177,14 +189,26 @@ void Mapa::playerAction() {
 		if (salaActual()->sala[player->y][player->x + 1] == '#')break;
 		else if (salaActual()->sala[player->y][player->x + 1] == 'E')
 		{
+			for (int i = 0; i < salaActual()->enemies->size(); i++) {
+				if (player->y == (*salaActual()->enemies)[i]->y && player->x + 1 == (*salaActual()->enemies)[i]->x)
+				{
+					(*salaActual()->enemies)[i]->receiveDamage();
 
+					if ((*salaActual()->enemies)[i]->vida <= 0)
+					{
+						(*salaActual()->enemies)[i]->inMovement = false;
+						salaActual()->spawnRandomObject((*salaActual()->enemies)[i]->x, (*salaActual()->enemies)[i]->y);
+						salaActual()->enemies->erase(salaActual()->enemies->begin() + i);
+					}
+				}
+			}
 		}
 		else if (salaActual()->sala[player->y][player->x + 1] == 'C')
 		{
 			for (int i = 0; i < salaActual()->cofres.size(); i++) {
 				if (player->y == salaActual()->cofres[i].y && player->x + 1 == salaActual()->cofres[i].x)
 				{
-					salaActual()->sala[player->y][player->x + 1] = salaActual()->cofres[i].spawnRandomObject();
+					salaActual()->spawnRandomObject(salaActual()->cofres[i].x, salaActual()->cofres[i].y);
 					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
 				}
 			}
@@ -231,14 +255,26 @@ void Mapa::playerAction() {
 		if (salaActual()->sala[player->y][player->x - 1] == '#')break;
 		else if (salaActual()->sala[player->y][player->x - 1] == 'E')
 		{
+			for (int i = 0; i < salaActual()->enemies->size(); i++) {
+				if (player->y == (*salaActual()->enemies)[i]->y && player->x - 1 == (*salaActual()->enemies)[i]->x)
+				{
+					(*salaActual()->enemies)[i]->receiveDamage();
 
+					if ((*salaActual()->enemies)[i]->vida <= 0)
+					{
+						(*salaActual()->enemies)[i]->inMovement = false;
+						salaActual()->spawnRandomObject((*salaActual()->enemies)[i]->x, (*salaActual()->enemies)[i]->y);
+						salaActual()->enemies->erase(salaActual()->enemies->begin() + i);
+					}
+				}
+			}
 		}
 		else if (salaActual()->sala[player->y][player->x - 1] == 'C')
 		{
 			for (int i = 0; i < salaActual()->cofres.size(); i++) {
 				if (player->y == salaActual()->cofres[i].y && player->x - 1 == salaActual()->cofres[i].x)
 				{
-					salaActual()->sala[player->y][player->x - 1] = salaActual()->cofres[i].spawnRandomObject();
+					salaActual()->spawnRandomObject(salaActual()->cofres[i].x, salaActual()->cofres[i].y);
 					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
 				}
 			}
@@ -285,14 +321,26 @@ void Mapa::playerAction() {
 		if (salaActual()->sala[player->y + 1][player->x] == '#')break;
 		else if (salaActual()->sala[player->y + 1][player->x] == 'E')
 		{
+			for (int i = 0; i < salaActual()->enemies->size(); i++) {
+				if (player->y + 1 == (*salaActual()->enemies)[i]->y && player->x == (*salaActual()->enemies)[i]->x)
+				{
+					(*salaActual()->enemies)[i]->receiveDamage();
 
+					if ((*salaActual()->enemies)[i]->vida <= 0)
+					{
+						(*salaActual()->enemies)[i]->inMovement = false;
+						salaActual()->spawnRandomObject((*salaActual()->enemies)[i]->x, (*salaActual()->enemies)[i]->y);
+						salaActual()->enemies->erase(salaActual()->enemies->begin() + i);
+					}
+				}
+			}
 		}
 		else if (salaActual()->sala[player->y + 1][player->x] == 'C')
 		{
 			for (int i = 0; i < salaActual()->cofres.size(); i++) {
 				if (player->y + 1== salaActual()->cofres[i].y && player->x == salaActual()->cofres[i].x)
 				{
-					salaActual()->sala[player->y + 1][player->x] = salaActual()->cofres[i].spawnRandomObject();
+					salaActual()->spawnRandomObject(salaActual()->cofres[i].x, salaActual()->cofres[i].y);
 					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
 				}
 			}

@@ -18,6 +18,7 @@ public:
 	std::map<string, string> locations;
 	int sizeX = 34; 
 	int sizeY = 13;
+
 	std::string location;
 	char** sala = new char*[sizeY];
 	Player* player;
@@ -26,8 +27,9 @@ public:
 	void pintarSala();
 	void crearCofre();
 	void crearEnemigo();
-	
+	void crearThreadEnemigo();
 	void salirSala();
+	void spawnRandomObject(int x, int y);
 
 	void pintarElementos();
 	void addPortal(string loc, string sala) { locations.insert({loc, sala}); }

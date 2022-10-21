@@ -25,7 +25,7 @@ void Sala::leerSala() {
 void Sala::pintarSala() {
 	for (int i = 0; i < enemies->size(); i++) {
 		((*enemies)[i])->inMovement = true;
-		std::thread* enemyMove = new std::thread(&Enemy::moveEnemy, (*enemies)[i]);
+		std::thread* enemyMove = new std::thread(&Enemy::moveEnemy, (*enemies)[i], this);
 		enemyMove->detach();
 
 	}
@@ -33,12 +33,14 @@ void Sala::pintarSala() {
 		sala[cofres[i].y][cofres[i].x] = cofres[i].cofre;
 	}
 
+	player->consoleControl.LockMutex();
+
 	for (int y = 0; y < sizeY; y++) {
 		for (int x = 0; x < sizeX; x++) {
 			std::cout << sala[y][x];
 		}
 	}
-	player->consoleControl.LockMutex();
+
 
 	player->consoleControl.SetPosition(player->x, player->y);
 	std::cout << player->player;
@@ -128,9 +130,11 @@ void Sala::crearEnemigo() {
 
 	enemies->push_back(enemy);
 
-	std::thread*  enemyMove = new std::thread(&Enemy::moveEnemy, enemy);
+
+	std::thread*  enemyMove = new std::thread(&Enemy::moveEnemy, enemy, this);
 	enemyMove->detach();
 }
+
 
 void Sala::salirSala() {
 	for (int i = 0; i < enemies->size(); i++) {
@@ -140,6 +144,28 @@ void Sala::salirSala() {
 	}
 }
 
+void Sala::spawnRandomObject(int x, int y) {
+
+	int i = rand() % 20;
+
+	player->consoleControl.LockMutex();
+
+	player->consoleControl.SetPosition(x, y);
+	if (i < 15) {
+		sala[y][x] = 'M';
+		std::cout << 'M';
+	}
+	else if (i >= 15 && i < 19) {
+		sala[y][x] = 'P';
+		std::cout << 'P';
+	}
+	else {
+		sala[y][x] = 'A';
+		std::cout << 'A';
+	}
+	player->consoleControl.UnlockMutex();
+
+}
 
 
 void Sala::leerEnemigos() {

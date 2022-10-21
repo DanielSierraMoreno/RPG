@@ -4,6 +4,7 @@
 #include <thread>
 
 int main() {
+	srand(time(NULL));
 	//Teclas posibles
 	vector<int> keys{ KB_UP , KB_DOWN , KB_LEFT , KB_RIGHT , KB_SPACE };
 
@@ -27,13 +28,9 @@ int main() {
 
 	mapa.pintarMapa();
 
-	bool gameloop = true;
 
-	while (gameloop)
+	while (mapa.player->gameloop)
 	{
-		//Crea un nuevo thread al crear un nuevo enemigo
-	
-
 		//Cambio de sala al atravesar un portal 
 		if (mapa.salaActual()->location != "") {
 			mapa.salaActual()->salirSala();
@@ -45,5 +42,6 @@ int main() {
 		}
 
 	}
-
+	system("CLS");
+	std::printf("\n\n\n\n\n\n                You died \n\n\n\n\n\n");
 }

@@ -5,6 +5,22 @@
 #include <fstream>
 #include <thread>
 
+void Player::receivedamage() {
+    if (vidas > 1)
+    {
+        vidas--;
+
+        consoleControl.SetPosition(50, 1);
+        std::cout << "Vidas: " << vidas;
+
+    }
+    else
+    {
+
+        gameloop = false;
+    }
+   
+}
 
 void Player::addCoin() {
 	monedas++;
