@@ -1,10 +1,38 @@
 {
 	"Enemigo0" : 
 	{
-		"inMove" : false,
+		"inMove" : true,
 		"life" : 2,
-		"posX" : 15,
+		"posX" : 7,
+		"posY" : 7
+	},
+	"Enemigo1" : 
+	{
+		"inMove" : true,
+		"life" : 2,
+		"posX" : 6,
+		"posY" : 4
+	},
+	"Enemigo2" : 
+	{
+		"inMove" : true,
+		"life" : 2,
+		"posX" : 4,
+		"posY" : 7
+	},
+	"Enemigo3" : 
+	{
+		"inMove" : true,
+		"life" : 2,
+		"posX" : 7,
+		"posY" : 9
+	},
+	"Enemigo4" : 
+	{
+		"inMove" : true,
+		"life" : 2,
+		"posX" : 6,
 		"posY" : 5
 	},
-	"numeroEnemigos" : 1
+	"numeroEnemigos" : 5
 }

@@ -3,5 +3,11 @@
 	"Cofre0y" : 8,
 	"Cofre1x" : 15,
 	"Cofre1y" : 8,
-	"numeroCofres" : 2
+	"Cofre2x" : 27,
+	"Cofre2y" : 3,
+	"Cofre3x" : 23,
+	"Cofre3y" : 3,
+	"Cofre4x" : 7,
+	"Cofre4y" : 11,
+	"numeroCofres" : 5
 }

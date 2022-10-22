@@ -128,7 +128,11 @@ void Mapa::playerAction() {
 			for (int i = 0; i < salaActual()->enemies->size(); i++) {
 				if (player->y - 1 == (*salaActual()->enemies)[i]->y && player->x == (*salaActual()->enemies)[i]->x)
 				{
+					player->consoleControl.LockMutex();
+
 					(*salaActual()->enemies)[i]->receiveDamage();
+
+					player->consoleControl.UnlockMutex();
 
 					if ((*salaActual()->enemies)[i]->vida <= 0)
 					{
@@ -161,7 +165,7 @@ void Mapa::playerAction() {
 			salaActual()->location = salaActual()->locations.find("Norte")->second;
 			player->y += salaActual()->sizeY - 3;
 		}
-		else if (salaActual()->sala[player->y - 2][player->x] == 'E' && salaActual()->player->weapon == "lanza")
+		else if (salaActual()->sala[player->y - 2][player->x] == 'E' && salaActual()->sala[player->y - 1][player->x] == ' ' && salaActual()->player->weapon == "lanza")
 		{
 			for (int i = 0; i < salaActual()->enemies->size(); i++) {
 				if (player->y - 2 == (*salaActual()->enemies)[i]->y && player->x == (*salaActual()->enemies)[i]->x)
@@ -226,7 +230,11 @@ void Mapa::playerAction() {
 			for (int i = 0; i < salaActual()->enemies->size(); i++) {
 				if (player->y == (*salaActual()->enemies)[i]->y && player->x + 1 == (*salaActual()->enemies)[i]->x)
 				{
+					player->consoleControl.LockMutex();
+
 					(*salaActual()->enemies)[i]->receiveDamage();
+
+					player->consoleControl.UnlockMutex();
 
 					if ((*salaActual()->enemies)[i]->vida <= 0)
 					{
@@ -247,7 +255,7 @@ void Mapa::playerAction() {
 				}
 			}
 		}
-		else if (salaActual()->sala[player->y][player->x + 2] == 'E' && salaActual()->player->weapon == "lanza")
+		else if (salaActual()->sala[player->y][player->x + 2] == 'E' && salaActual()->sala[player->y][player->x+1] == ' ' && salaActual()->player->weapon == "lanza")
 		{
 			for (int i = 0; i < salaActual()->enemies->size(); i++) {
 				if (player->y == (*salaActual()->enemies)[i]->y && player->x + 2 == (*salaActual()->enemies)[i]->x)
@@ -325,7 +333,11 @@ void Mapa::playerAction() {
 			for (int i = 0; i < salaActual()->enemies->size(); i++) {
 				if (player->y == (*salaActual()->enemies)[i]->y && player->x - 1 == (*salaActual()->enemies)[i]->x)
 				{
+					player->consoleControl.LockMutex();
+
 					(*salaActual()->enemies)[i]->receiveDamage();
+
+					player->consoleControl.UnlockMutex();
 
 					if ((*salaActual()->enemies)[i]->vida <= 0)
 					{
@@ -346,7 +358,7 @@ void Mapa::playerAction() {
 				}
 			}
 		}
-		else if (salaActual()->sala[player->y][player->x - 2] == 'E' && salaActual()->player->weapon == "lanza")
+		else if (salaActual()->sala[player->y][player->x - 2] == 'E' && salaActual()->sala[player->y][player->x-1] == ' ' && salaActual()->player->weapon == "lanza")
 		{
 			for (int i = 0; i < salaActual()->enemies->size(); i++) {
 				if (player->y == (*salaActual()->enemies)[i]->y && player->x - 2 == (*salaActual()->enemies)[i]->x)
@@ -424,7 +436,11 @@ void Mapa::playerAction() {
 			for (int i = 0; i < salaActual()->enemies->size(); i++) {
 				if (player->y + 1 == (*salaActual()->enemies)[i]->y && player->x == (*salaActual()->enemies)[i]->x)
 				{
+					player->consoleControl.LockMutex();
+
 					(*salaActual()->enemies)[i]->receiveDamage();
+
+					player->consoleControl.UnlockMutex();
 
 					if ((*salaActual()->enemies)[i]->vida <= 0)
 					{
@@ -458,7 +474,7 @@ void Mapa::playerAction() {
 			player->y -= salaActual()->sizeY - 3;
 
 		}
-		else if (salaActual()->sala[player->y + 2][player->x] == 'E' && salaActual()->player->weapon == "lanza")
+		else if (salaActual()->sala[player->y + 2][player->x] == 'E' && salaActual()->sala[player->y + 1][player->x] == ' ' && salaActual()->player->weapon == "lanza")
 		{
 			for (int i = 0; i < salaActual()->enemies->size(); i++) {
 				if (player->y + 2 == (*salaActual()->enemies)[i]->y && player->x == (*salaActual()->enemies)[i]->x)
@@ -575,7 +591,7 @@ void Mapa::guardarPartida() {
 	std::cout << "          ";
 	player->consoleControl.UnlockMutex();
 
-	std::this_thread::sleep_for(std::chrono::seconds(5));
+	std::this_thread::sleep_for(std::chrono::milliseconds(4500));
 
 	player->consoleControl.LockMutex();
 

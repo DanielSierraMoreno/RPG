@@ -1,5 +1,13 @@
 {
 	"Cofre0x" : 6,
 	"Cofre0y" : 11,
-	"numeroCofres" : 1
+	"Cofre1x" : 3,
+	"Cofre1y" : 2,
+	"Cofre2x" : 26,
+	"Cofre2y" : 4,
+	"Cofre3x" : 31,
+	"Cofre3y" : 6,
+	"Cofre4x" : 20,
+	"Cofre4y" : 8,
+	"numeroCofres" : 5
 }
