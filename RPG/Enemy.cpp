@@ -63,7 +63,7 @@ void Enemy::moveEnemy(Sala* sala) {
 			else
 			{
 	
-					if (sala->sala[y][x - 1] == ' ' && sala->sala[y-1][x - 1] == ' ')
+					if (sala->sala[y][x - 1] == ' ' && sala->sala[y-1][x - 1] == ' ' && abs(sala->player->x - (x-1)) < abs(sala->player->x - (x+1)))
 					{
 						drawEnemy(-1, 0, sala);
 						direccion = direction::ARRIBA;
@@ -118,7 +118,7 @@ void Enemy::moveEnemy(Sala* sala) {
 			}
 			else
 			{
-					if (sala->sala[y][x - 1] == ' ' && sala->sala[y+1][x - 1] == ' ')
+					if (sala->sala[y][x - 1] == ' ' && sala->sala[y+1][x - 1] == ' ' && abs(sala->player->x - (x - 1)) < abs(sala->player->x - (x + 1)))
 					{
 						drawEnemy(-1, 0, sala);
 						direccion = direction::ABAJO;
@@ -176,7 +176,7 @@ void Enemy::moveEnemy(Sala* sala) {
 			}
 			else
 			{
-				if (sala->sala[y-1][x] == ' ' && sala->sala[y - 1][x - 1] == ' ')
+				if (sala->sala[y-1][x] == ' ' && sala->sala[y - 1][x - 1] == ' ' && abs(sala->player->y - (y - 1)) < abs(sala->player->y - (y + 1)))
 				{
 					drawEnemy(0, -1, sala);
 					direccion = direction::IZQ;
@@ -231,7 +231,7 @@ void Enemy::moveEnemy(Sala* sala) {
 			}
 			else
 			{
-				if (sala->sala[y - 1][x] == ' ' && sala->sala[y - 1][x + 1] == ' ')
+				if (sala->sala[y - 1][x] == ' ' && sala->sala[y - 1][x + 1] == ' ' && abs(sala->player->y - (y - 1)) < abs(sala->player->y - (y + 1)))
 				{
 					drawEnemy(0, -1, sala);
 					direccion = direction::DER;
