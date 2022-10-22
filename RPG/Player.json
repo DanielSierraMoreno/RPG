@@ -1,10 +1,10 @@
 {
 	"Player" : 
 	{
-		"coins" : 8,
+		"coins" : 2,
 		"life" : 3,
-		"posX" : 16,
-		"posY" : 1,
+		"posX" : 14,
+		"posY" : 3,
 		"potions" : 0,
 		"weapon" : "espada"
 	}
