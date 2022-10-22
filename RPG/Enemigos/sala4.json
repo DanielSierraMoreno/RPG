@@ -3,36 +3,29 @@
 	{
 		"inMove" : true,
 		"life" : 2,
-		"posX" : 24,
-		"posY" : 2
+		"posX" : 26,
+		"posY" : 3
 	},
 	"Enemigo1" : 
 	{
 		"inMove" : true,
 		"life" : 2,
-		"posX" : 24,
-		"posY" : 3
+		"posX" : 27,
+		"posY" : 4
 	},
 	"Enemigo2" : 
 	{
 		"inMove" : true,
 		"life" : 2,
-		"posX" : 8,
-		"posY" : 2
+		"posX" : 15,
+		"posY" : 9
 	},
 	"Enemigo3" : 
 	{
 		"inMove" : true,
 		"life" : 2,
-		"posX" : 11,
-		"posY" : 3
+		"posX" : 17,
+		"posY" : 5
 	},
-	"Enemigo4" : 
-	{
-		"inMove" : true,
-		"life" : 2,
-		"posX" : 14,
-		"posY" : 6
-	},
-	"numeroEnemigos" : 5
+	"numeroEnemigos" : 4
 }
