@@ -16,7 +16,8 @@ int main() {
 	Mapa mapa(&player);
 	mapa.crearMapa();
 	mapa.leerMapa();
-	mapa.zona = "medio";
+	mapa.leerTodosLosEnemigos();
+	mapa.leerTodosLosCofres();
 
 	std::thread playerMove(&Mapa::playerInputs, &mapa, &inputManager);
 	playerMove.detach();
@@ -24,6 +25,8 @@ int main() {
 	std::thread creadorCofreEnemigo(&Mapa::eventoSala, &mapa);
 	creadorCofreEnemigo.detach();
 
+	std::thread sistemaGuardado(&Mapa::guardarPartida, &mapa);
+	sistemaGuardado.detach();
 
 	mapa.pintarMapa();
 

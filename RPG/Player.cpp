@@ -57,75 +57,41 @@ void Player::upgradeWeapon() {
 
 
 
-static Player* Parse(Json::Value jsonValue)
+void Player::Parse(Json::Value jsonValue)
 {
-    Player* newPlayer = new Player();
     try
     {
 
-        newPlayer->vidas = jsonValue["life"].asInt();
-        newPlayer->monedas = jsonValue["coins"].asInt();
-        newPlayer->pociones = jsonValue["potions"].asInt();
-        newPlayer->x = jsonValue["posX"].asInt();
-        newPlayer->y = jsonValue["posY"].asInt();
-        newPlayer->weapon = jsonValue["weapon"].asString();
+        this->vidas = jsonValue["life"].asInt();
+        this->monedas = jsonValue["coins"].asInt();
+        this->pociones = jsonValue["potions"].asInt();
+        this->x = jsonValue["posX"].asInt();
+        this->y = jsonValue["posY"].asInt();
+        this->weapon = jsonValue["weapon"].asString();
 
-       /* Json::Value weaponsArray = Json::Value(Json::arrayValue);
-        weaponsArray = jsonValue["weapons"];
 
-        for (int i = 0; i < weaponsArray.size(); i++)
-        {
-            Json::Value weaponJson = weaponsArray[i];
-            Weapon* newWeapon = Weapon::Parse(weaponJson);
-
-            if (newWeapon != nullptr)
-            {
-                newCharacter->weapons->push_back(newWeapon);
-            }
-        }*/
-
-        return newPlayer;
     }
     catch (const std::exception&)
     {
-        delete newPlayer;
-        return nullptr;
+   
     }
 }
 
-void Player::writeToJson()
+void Player::readPlayer()
 {
     std::ifstream* jsonReadFile = new std::ifstream("Player.json", std::ifstream::binary);
 
-   /* if(!jsonReadFile->fail())
+    if(!jsonReadFile->fail())
     {
     
         Json::Value jsonValue;
         *jsonReadFile >> jsonValue;
         jsonReadFile->close();
     
-        Player* newChar = Player::Parse(jsonValue["Player"]); 
+        
+       Player::Parse(jsonValue["Player"]);
 
-
-        if (newChar != nullptr)
-        {
-
-            Json::Value newJsonValue; 
-            newJsonValue["Player"] = newChar->ToJsonValue(); 
-           
-
-            std::ofstream* jsonWriteFile = new std::ofstream("Player.json", std::ifstream::binary); 
-
-            if (!jsonWriteFile->fail()) 
-            {
-                *jsonWriteFile << newJsonValue; 
-                jsonWriteFile->close(); 
-            }
-        }
-    
-    
-    
-    }*/
+    }
 
 }
 
@@ -143,6 +109,23 @@ Json::Value Player::ToJsonValue()
     return jsonValue;
 }
 
+void Player::savePlayer() {
+    std::ofstream* jsonWriteFile = new std::ofstream("Player.json", std::ifstream::binary);
+
+    Json::Value newJsonValue; 
+    newJsonValue["Player"] = this->ToJsonValue();
+
+    if (!jsonWriteFile->fail())
+    {
+        *jsonWriteFile << newJsonValue;
+
+        jsonWriteFile->close();
+    }
+
+    
+}
+
+
 void Player::usePotion() {
 	pociones--;
 
@@ -150,4 +133,11 @@ void Player::usePotion() {
 	std::cout << "Pociones: " << pociones;
 
 	addLife();
+}
+
+Player::Player(){
+  playerState = STAY; 
+  player = 'J';  
+  gameloop = true; 
+  readPlayer();
 }

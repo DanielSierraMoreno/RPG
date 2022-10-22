@@ -1,8 +1,9 @@
 #include "Enemy.h"
+#include "Sala.h"
 #include <chrono>
 #include <thread>
 #include <iostream>
-#include "Sala.h"
+#include <fstream>
 #include <cmath>
 
 void Enemy::drawEnemy(int movX, int movY, Sala* sala) {
@@ -54,11 +55,16 @@ void Enemy::moveEnemy(Sala* sala) {
 			}
 			else
 			{
-				if ((sala->player->x - x) < 0)
+				if ((sala->player->x - x) < 0 || direccion == direction::IZQ)
 				{
 					if (sala->sala[y][x - 1] == ' ')
 					{
 						drawEnemy(-1, 0, sala);
+						direccion = direction::IZQ;
+					}
+					else
+					{
+						direccion = direction::DER;
 					}
 				}
 				else
@@ -66,9 +72,13 @@ void Enemy::moveEnemy(Sala* sala) {
 					if (sala->sala[y][x + 1] == ' ')
 					{
 						drawEnemy(1, 0, sala);
+						direccion = direction::DER;
+					}
+					else
+					{
+						direccion = direction::IZQ;
 					}
 				}	
-				caminoBloqueado = true;
 
 			}
 		}
@@ -84,11 +94,16 @@ void Enemy::moveEnemy(Sala* sala) {
 			}
 			else
 			{
-				if ((sala->player->x - x) < 0)
+				if ((sala->player->x - x) < 0 || direccion == direction::IZQ)
 				{
 					if (sala->sala[y][x - 1] == ' ')
 					{
 						drawEnemy(-1, 0, sala);
+						direccion = direction::IZQ;
+					}
+					else
+					{
+						direccion = direction::DER;
 					}
 				}
 				else
@@ -96,9 +111,15 @@ void Enemy::moveEnemy(Sala* sala) {
 					if (sala->sala[y][x + 1] == ' ')
 					{
 						drawEnemy(1, 0, sala);
+						direccion = direction::DER;
+					}
+					else
+					{
+						direccion = direction::IZQ;
 					}
 				}
 			}
+
 		}
 	}
 	else 
@@ -115,11 +136,16 @@ void Enemy::moveEnemy(Sala* sala) {
 			}
 			else
 			{
-				if ((sala->player->y - y) < 0)
+				if ((sala->player->y - y) < 0 || direccion == direction::ARRIBA)
 				{
 					if (sala->sala[y-1][x] == ' ')
 					{
 						drawEnemy(0, -1, sala);
+						direccion = direction::ARRIBA;
+					}
+					else 
+					{
+						direccion = direction::ABAJO;
 					}
 				}
 				else
@@ -127,9 +153,15 @@ void Enemy::moveEnemy(Sala* sala) {
 					if (sala->sala[y+1][x] == ' ')
 					{
 						drawEnemy(0, 1, sala);
+						direccion = direction::ABAJO;
+					}
+					else 
+					{
+						direccion = direction::ARRIBA;
 					}
 				}
 			}
+
 		}
 		else
 		{
@@ -158,6 +190,7 @@ void Enemy::moveEnemy(Sala* sala) {
 					}
 				}
 			}
+
 		}
 	}
 
@@ -170,3 +203,27 @@ void Enemy::moveEnemy(Sala* sala) {
 }
 
 
+
+
+
+
+Json::Value Enemy::ToJsonValue()
+{
+	Json::Value jsonValue;
+
+	jsonValue["life"] = this->vida;
+	jsonValue["posX"] = this->x;
+	jsonValue["posY"] = this->y;
+	jsonValue["inMove"] = this->inMovement;
+
+
+	return jsonValue;
+}
+
+
+
+Enemy::Enemy() {
+	 vida = 2;
+	 inMovement = true;
+	 direccion = direction::SPAWN;
+}

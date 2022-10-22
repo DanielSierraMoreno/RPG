@@ -1,0 +1,24 @@
+{
+	"Enemigo0" : 
+	{
+		"inMove" : true,
+		"life" : 2,
+		"posX" : 14,
+		"posY" : 9
+	},
+	"Enemigo1" : 
+	{
+		"inMove" : true,
+		"life" : 2,
+		"posX" : 19,
+		"posY" : 8
+	},
+	"Enemigo2" : 
+	{
+		"inMove" : true,
+		"life" : 2,
+		"posX" : 23,
+		"posY" : 5
+	},
+	"numeroEnemigos" : 3
+}

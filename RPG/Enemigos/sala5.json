@@ -1,0 +1,10 @@
+{
+	"Enemigo0" : 
+	{
+		"inMove" : false,
+		"life" : 2,
+		"posX" : 5,
+		"posY" : 1
+	},
+	"numeroEnemigos" : 1
+}

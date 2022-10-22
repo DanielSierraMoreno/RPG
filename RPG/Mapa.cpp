@@ -1,18 +1,19 @@
 #include "Mapa.h"
 #include "Sala.h"
 #include <iostream>
+#include <fstream>
 
 
 void Mapa::crearMapa() {
-	Sala sala0("Mapa/Mapa0.txt");
-	Sala sala1("Mapa/Mapa1.txt");
-	Sala sala2("Mapa/Mapa2.txt");
-	Sala sala3("Mapa/Mapa3.txt");
-	Sala sala4("Mapa/Mapa4.txt");
-	Sala sala5("Mapa/Mapa5.txt");
-	Sala sala6("Mapa/Mapa6.txt");
-	Sala sala7("Mapa/Mapa7.txt");
-	Sala sala8("Mapa/Mapa8.txt");
+	Sala sala0("Mapa/Mapa0.txt", "sala0.json");
+	Sala sala1("Mapa/Mapa1.txt", "sala1.json");
+	Sala sala2("Mapa/Mapa2.txt", "sala2.json");
+	Sala sala3("Mapa/Mapa3.txt", "sala3.json");
+	Sala sala4("Mapa/Mapa4.txt", "sala4.json");
+	Sala sala5("Mapa/Mapa5.txt", "sala5.json");
+	Sala sala6("Mapa/Mapa6.txt", "sala6.json");
+	Sala sala7("Mapa/Mapa7.txt", "sala7.json");
+	Sala sala8("Mapa/Mapa8.txt", "sala8.json");
 
 
 	mapa.insert({"arribaIzq", sala0 });
@@ -148,6 +149,18 @@ void Mapa::playerAction() {
 				}
 			}
 		}
+		else if (salaActual()->sala[player->y - 1][player->x] == 'O')
+		{
+			player->consoleControl.LockMutex();
+
+			player->consoleControl.SetPosition(player->x, player->y);
+			salaActual()->sala[player->y][player->x] = ' ';
+
+			player->consoleControl.UnlockMutex();
+
+			salaActual()->location = salaActual()->locations.find("Norte")->second;
+			player->y += salaActual()->sizeY - 3;
+		}
 		else if (salaActual()->sala[player->y - 2][player->x] == 'E' && salaActual()->player->weapon == "lanza")
 		{
 			for (int i = 0; i < salaActual()->enemies->size(); i++) {
@@ -173,11 +186,6 @@ void Mapa::playerAction() {
 					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
 				}
 			}
-		}
-		else if (salaActual()->sala[player->y - 1][player->x] == 'O')
-		{
-			salaActual()->location = salaActual()->locations.find("Norte")->second;
-			player->y += salaActual()->sizeY - 3;
 		}
 		else
 		{
@@ -267,6 +275,13 @@ void Mapa::playerAction() {
 		}
 		else if (salaActual()->sala[player->y][player->x + 1] == 'O')
 		{
+			player->consoleControl.LockMutex();
+
+			player->consoleControl.SetPosition(player->x, player->y);
+			salaActual()->sala[player->y][player->x] = ' ';
+
+			player->consoleControl.UnlockMutex();
+
 			salaActual()->location = salaActual()->locations.find("Este")->second;
 			player->x -= salaActual()->sizeX - 4;
 
@@ -359,6 +374,13 @@ void Mapa::playerAction() {
 		}
 		else if (salaActual()->sala[player->y][player->x - 1] == 'O')
 		{
+			player->consoleControl.LockMutex();
+
+			player->consoleControl.SetPosition(player->x, player->y);
+			salaActual()->sala[player->y][player->x] = ' ';
+
+			player->consoleControl.UnlockMutex();
+
 			salaActual()->location = salaActual()->locations.find("Oeste")->second;
 			player->x += salaActual()->sizeX - 4;
 
@@ -423,6 +445,19 @@ void Mapa::playerAction() {
 				}
 			}
 		}
+		else if (salaActual()->sala[player->y + 1][player->x] == 'O')
+		{
+			player->consoleControl.LockMutex();
+
+			player->consoleControl.SetPosition(player->x, player->y);
+			salaActual()->sala[player->y][player->x] = ' ';
+
+			player->consoleControl.UnlockMutex();
+
+			salaActual()->location = salaActual()->locations.find("Sur")->second;
+			player->y -= salaActual()->sizeY - 3;
+
+		}
 		else if (salaActual()->sala[player->y + 2][player->x] == 'E' && salaActual()->player->weapon == "lanza")
 		{
 			for (int i = 0; i < salaActual()->enemies->size(); i++) {
@@ -448,12 +483,6 @@ void Mapa::playerAction() {
 					salaActual()->cofres.erase(salaActual()->cofres.begin() + i);
 				}
 			}
-		}
-		else if (salaActual()->sala[player->y + 1][player->x] == 'O')
-		{
-			salaActual()->location = salaActual()->locations.find("Sur")->second;
-			player->y -= salaActual()->sizeY - 3;
-
 		}
 		else
 		{
@@ -531,5 +560,92 @@ void Mapa::eventoSala() {
 	}
 
 
+
+}
+
+void Mapa::guardarPartida() {
+
+	while (player->gameloop)
+	{
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+	player->consoleControl.LockMutex();
+
+	player->consoleControl.SetPosition(12, 13);
+	std::cout << "          ";
+	player->consoleControl.UnlockMutex();
+
+	std::this_thread::sleep_for(std::chrono::seconds(5));
+
+	player->consoleControl.LockMutex();
+
+	player->consoleControl.SetPosition(12, 13);
+	std::cout << "Game saved";
+
+	player->consoleControl.UnlockMutex();
+
+	player->savePlayer();
+
+	guardarSalaActual();
+
+	for (auto it = mapa.begin(); it != mapa.end(); it++)
+	{
+		it->second.guardarEnemigos();
+		it->second.guardarCofres();
+		it->second.guardarSala();
+	}
+
+	}
+}
+
+void Mapa::guardarSalaActual() {
+	std::ofstream* jsonWriteFile = new std::ofstream("Mapa.json", std::ifstream::binary);
+
+	Json::Value newJsonValue;
+	newJsonValue["zona"] = this->zona;
+
+	if (!jsonWriteFile->fail())
+	{
+		*jsonWriteFile << newJsonValue;
+
+		jsonWriteFile->close();
+	}
+
+}
+
+void Mapa::leerSalaActual() {
+	std::ifstream* jsonReadFile = new std::ifstream("Mapa.json", std::ifstream::binary);
+
+	if (!jsonReadFile->fail())
+	{
+
+		Json::Value jsonValue;
+		*jsonReadFile >> jsonValue;
+		jsonReadFile->close();
+
+		this->zona = jsonValue["zona"].asString();
+
+	}
+}
+void Mapa::leerTodosLosEnemigos() {
+	for (auto it = mapa.begin(); it != mapa.end(); it++)
+	{
+		it->second.leerEnemigos();
+	}
+}
+
+void Mapa::leerTodosLosCofres() {
+	for (auto it = mapa.begin(); it != mapa.end(); it++)
+	{
+		it->second.leerCofres();
+	}
+}
+
+
+Mapa::Mapa(Player* player) 
+{ 
+	this->player = player; 
+
+	leerSalaActual();
 
 }

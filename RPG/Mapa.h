@@ -10,7 +10,7 @@ public:
 	std::map<std::string, Sala> mapa;
 	Player* player;
 	std::string zona;
-	Mapa(Player* player) { this->player = player; }
+	Mapa(Player* player);
 	void crearMapa();
 	void leerMapa();
 	void pintarMapa();
@@ -21,9 +21,13 @@ public:
 
 	void eventoSala();
 
-	void leerPlayer();
-	void leerZona();
-	void guardarPlayer();
-	void guardarZona();
+	void guardarPartida();
+	void guardarSalaActual();
+	void leerSalaActual();
+
+	void leerTodosLosEnemigos();
+	void leerTodosLosCofres();
+
+
 };
 

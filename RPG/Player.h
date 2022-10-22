@@ -24,7 +24,7 @@ public:
 	int x;
 	int y;
 	char player;
-	Player() { x = 16; y = 6; playerState = STAY; player = 'J'; monedas = 0; gameloop = true; vidas = 3; }
+	Player();
 
 	void addCoin();
 	void addPotion();
@@ -34,9 +34,10 @@ public:
 
 	void upgradeWeapon();
 
-	void writeToJson();
+	void readPlayer();
 
-	static Player* Parse(Json::Value jsonValue);
+	void savePlayer();
+	void Parse(Json::Value jsonValue);
 
 	Json::Value ToJsonValue();
 	
