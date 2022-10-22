@@ -535,7 +535,10 @@ void Mapa::playerAction() {
 	{
 		if (player->pociones > 0)
 		{
+		player->consoleControl.LockMutex();
+
 		player->usePotion();
+		player->consoleControl.UnlockMutex();
 
 		}
 		player->playerState = Player::STAY;
@@ -664,4 +667,9 @@ Mapa::Mapa(Player* player)
 
 	leerSalaActual();
 
+}
+
+void Mapa::cargarPartida() {
+	leerTodosLosEnemigos();
+	leerTodosLosCofres();
 }

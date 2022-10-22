@@ -3,21 +3,21 @@
 	{
 		"inMove" : false,
 		"life" : 2,
-		"posX" : 20,
+		"posX" : 19,
 		"posY" : 8
 	},
 	"Enemigo1" : 
 	{
 		"inMove" : false,
 		"life" : 2,
-		"posX" : 23,
+		"posX" : 18,
 		"posY" : 11
 	},
 	"Enemigo2" : 
 	{
 		"inMove" : false,
 		"life" : 2,
-		"posX" : 26,
+		"posX" : 21,
 		"posY" : 9
 	},
 	"numeroEnemigos" : 3

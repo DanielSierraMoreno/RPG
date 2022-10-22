@@ -16,8 +16,7 @@ int main() {
 	Mapa mapa(&player);
 	mapa.crearMapa();
 	mapa.leerMapa();
-	mapa.leerTodosLosEnemigos();
-	mapa.leerTodosLosCofres();
+	mapa.cargarPartida();
 
 	std::thread playerMove(&Mapa::playerInputs, &mapa, &inputManager);
 	playerMove.detach();

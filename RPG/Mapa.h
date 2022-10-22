@@ -25,6 +25,7 @@ public:
 	void guardarSalaActual();
 	void leerSalaActual();
 
+	void cargarPartida();
 	void leerTodosLosEnemigos();
 	void leerTodosLosCofres();
 
